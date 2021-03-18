@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<title>
+    Interactive Detector
+</title>
+<link rel = "stylesheet" href = "style.css">
+
+<script>
+    window.console = window.console || function(t) {};
+</script>
+
+<script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+
+</head>
+
+<body translate= "no">
+
+<link href= "https://fonts.googleapis.com/css?family=Montserrat" rel= "stylesheet">
+
+    <div class = "container">
+        
+        <!-- Left-side panel with rules and general info -->
+        <div class = "info" id = "rules">
+            <!-- Text box for game rules and info -->
+            <div class = "panel-heading">
+                <h4 class = "panel-title">
+                    Game Rules
+                </h4>
+            </div>
+            <div class = "panel-body" id = "rules-body">
+                <!-- Rules go here (link as a text file??) -->
+            </div>
+        </div>
+                        
+        <!-- The central app showing the detector, events, input, and score-->
+        <div class = "detector" id="detector-holder">  
+            <canvas id="detector-core" width = 400 height = 400> 
+                <img src = "assets/muon-square.png" id = "muon-tracker">
+            </canvas>
+        </div>  
+        <div  id = "app">
+
+            <div id = "main_app">
+                <div class="app_initoutput">
+                    <p class="app_level">
+                        Level: 1 - 1
+                    </p>
+                    <p class="app_wrong">
+                        Wrong: 0/5
+                    </p>
+                    
+                    <p id="detector_events">
+                        ..
+                    </p>            
+                </div>
+                <div class ="app_input">
+                    <table>
+                        <tr>
+                            <div class = "userParticle">
+                                <p>Particles: </p><p id="userParticle"></p>
+                            </div>                           
+                        </tr>
+                        <tr>
+                            <div class ="inputbuttons">
+                                <button name = "0" >0</button>
+                                <button name = "1" >1</button>
+                                <button name = "2" >2</button>
+                                <button name = "3" >3</button>
+                                <button name = "4" >4</button>
+                                <br>
+                                <button name = "Clear">Clear</button>
+                                <button name = "Submit" >Submit</button>
+                                <button name = "Restart" >Restart</button>
+                            </div>
+                        </tr>
+                    </table>
+                </div>    
+            </div>
+        </div> 
+        <!-- Right-side panel with subdetector info -->
+        <div class = "info" id = "subdet">
+            <div class = "panel-heading">
+                <h4 class = "panel-title">
+                    The Sub-Detectors
+                </h4>
+            </div>
+            <div class = "panel-body" id = "subdet-body">
+                <!-- The text for extra info for each of the subdetectors (link as text files or just insert here?) -->
+                <h5 class = "subdet-head">Silicon Tracker</h5>
+                <p class = "subdet-info" id = "sitr_info">
+                    <!-- Silicon tracker info here -->
+                </p>
+
+                <h5 class = "subdet-head">ECAL</h5>
+                <p class = "subdet-info" id = "ecal_info">
+                    <!-- ECAL info here -->
+                </p> 
+
+                <h5 class = "subdet-head">HCAL</h5>
+                <p class = "subdet-info" id = "hcal_info">
+                    <!-- HCAL info here -->
+                </p>
+
+                <h5 class = "subdet-head">Magnet</h5>
+                <p class = "subdet-info" id = "magnet_info">
+                    <!-- Magnet info here -->
+                </p>
+
+                <h5 class = "subdet-head">Muon Tracker</h5>
+                <p class = "subdet-info" id = "muontr_info">
+                    <!-- Muon tracker info here -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
+<script src = "game.js" type = "text/babel"></script>
+<script src = "anim.js"></script>
+<!--<script src = "GenParticle.js" type = "text/babel"></script>-->
+
+
+</body>
+
+
+</html>

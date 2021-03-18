@@ -1,0 +1,105 @@
+body {
+	width: 100%;
+  	margin: 0 auto;
+ 	background-color: rgb(236, 236, 236);
+	padding: 0 20px 20px 20px;
+    font-size: 16px;
+	font-family: 'Montserrat', monospace;
+}
+
+.container{
+    display: flex;  /*children are .info (#rules and #subdet) and #app*/
+    justify-content: space-around;
+    /*column-count: 3;*/
+}
+
+.info{
+    flex: 1;
+    border: 1px solid rgb(170, 170, 170)
+}
+
+#app{
+    display: flex;
+}
+
+#main_app {
+    top: 30px;
+    width: 600px;
+}
+
+canvas{
+    border: 1px solid black
+}
+
+#muon-tracker{
+    display: none;
+}
+
+#rules{
+    float:left;
+    z-index: 2
+}
+
+#subdet{
+    float: right;
+}
+
+.panel-heading{
+    color: rgb(32, 32, 32);
+}
+
+.panel-title{
+    font-family: 'Montserrat';
+}
+
+.panel-body{
+    height: 400px;
+    color: rgb(73, 73, 73)
+}
+
+.app_level {
+	float: left;
+    color: rgb(230, 188, 63);
+    z-index: 2;
+}
+
+.app_wrong {
+	float: right;
+    color: rgb(228, 89, 87);
+    z-index: 2;
+}
+
+/* these two are no longer in the html, may want to use the settings later though
+.btn_input {
+    background: white;
+    border: 1.5px solid black;
+    color: rgb(42, 42, 43);
+	padding: 8px 30px 9px;
+	font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+input {
+    outline: none;
+	border: none;
+	margin: 0 0 20px 3px;
+	padding: 8px 5px 0px 0;
+	background: transparent;
+	color: rgb(65, 65, 65);
+	font-size: 20px;
+	border-bottom: 1px dotted rgb(122, 148, 140);
+}
+*/
+button {
+	background: transparent;
+	border: 1px dashed rgba(250,250,255,1);
+	outline: none;
+	cursor: pointer;
+	color: rgb(42, 42, 43);
+	padding: 8px 30px 9px;
+	font-size: 14px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
