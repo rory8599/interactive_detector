@@ -56,7 +56,7 @@ var detector = {
 //this is creating a function as a property of an object (called a method)
     //In this method we are initalising the detector
 init: function(baseSize){
-    detector.core.canvas = document.getElementById('detector-core');
+    detector.core.canvas = document.getElementById('detector_core');
     detector.core.ctx = detector.core.canvas.getContext('2d');
 
     var devicePixelRatio = window.devicePixelRatio || 1;
