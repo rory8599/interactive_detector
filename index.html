@@ -42,45 +42,53 @@
             </div>
         </div>
                         
-        <!-- The central app showing the detector, events, input, and score-->
-        <div class = "detector" id="detector-holder">  
-            <canvas id="detector-core" width = 400 height = 400> 
-                <img src = "assets/muon-square.png" id = "muon-tracker">
-            </canvas>
-        </div>  
+        <!-- The central app showing the detector, events, input, and score. It doesn't like detector_core for some reason-->
+
         <div  id = "app">
+            <!-- Need to have another parent element below as the JSX elements need it. 
+                For some reason the canvases can't seem to go in here though.-->
+
 
             <div id = "main_app">
+
+
+                <div class = "detector" id="detector-holder">  
+                    <canvas id="detector_core" width = "400" height = "400"> 
+                        <img src = "assets/MuonTracker_whole.png" id = "muon-tracker">
+                    </canvas>
+                    <canvas id = "detector_events" width="400" height="400"></canvas>  
+                </div>  
                 <div class="app_initoutput">
-                    <p class="app_level">
-                        Level: 1 - 1
+                    <p id="app_level">
+                        Level: <input value = "1" type = "text" id="app_level_main" disabled/> - <input value = "1" type = "text" id = "app_level_sub" disabled/>
                     </p>
-                    <p class="app_wrong">
-                        Wrong: 0/5
+                    <p id="app_wrong">
+                        Wrong: <input value = "0" type = "text" id="app_wrong_number" disabled/>/5
                     </p>
-                    
-                    <p id="detector_events">
+
+                    <p id="randomNum">
                         ..
-                    </p>            
+                    </p>
+          
                 </div>
                 <div class ="app_input">
                     <table>
                         <tr>
                             <div class = "userParticle">
-                                <p>Particles: </p><p id="userParticle"></p>
+                                <p>Particles: </p><input type = "text" value = "" id="userParticle" disabled/>
                             </div>                           
                         </tr>
                         <tr>
                             <div class ="inputbuttons">
-                                <button name = "0" >0</button>
-                                <button name = "1" >1</button>
-                                <button name = "2" >2</button>
-                                <button name = "3" >3</button>
-                                <button name = "4" >4</button>
+                                <button name = "0" value = "0">0</button>
+                                <button name = "1" value = "1">1</button>
+                                <button name = "2" value = "2">2</button>
+                                <button name = "3" value = "3">3</button>
+                                <button name = "4" value = "4">4</button>
                                 <br>
-                                <button name = "Clear">Clear</button>
-                                <button name = "Submit" >Submit</button>
-                                <button name = "Restart" >Restart</button>
+                                <button value = "clear" name = "Clear">Clear</button>
+                                <button value = "submit" name = "Submit" >Submit</button>
+                                <button value = "restart" name = "Restart" >Restart</button>
                             </div>
                         </tr>
                     </table>
@@ -132,9 +140,9 @@
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
 
-<script src = "game.js" type = "text/babel"></script>
-<script src = "anim.js"></script>
-<!--<script src = "GenParticle.js" type = "text/babel"></script>-->
+<script src = "app.js"></script>
+<script src="detector.js"></script>
+<script src="particle.js"></script>
 
 
 </body>

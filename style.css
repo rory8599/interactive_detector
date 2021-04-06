@@ -18,9 +18,6 @@ body {
     border: 1px solid rgb(170, 170, 170)
 }
 
-#app{
-    display: flex;
-}
 
 #main_app {
     top: 30px;
@@ -29,6 +26,20 @@ body {
 
 canvas{
     border: 1px solid black
+}
+
+#detector_core{
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+#detector_events{
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 1;
 }
 
 #muon-tracker{
