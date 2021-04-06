@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+<head>
+
+
+<meta charset="UTF-8">
+
+<title>
+    Interactive Detector
+</title>
+<link rel = "stylesheet" href = "style.css">
+
+<script>
+    window.console = window.console || function(t) {};
+</script>
+
+<script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+
+</head>
+
+<body translate= "no">
+
+<link href= "https://fonts.googleapis.com/css?family=Montserrat" rel= "stylesheet">
+
+    <div class = "container">
+        
+        <!-- Left-side panel with rules and general info -->
+        <div class = "info" id = "rules">
+            <!-- Text box for game rules and info -->
+            <div class = "panel-heading">
+                <h4 class = "panel-title">
+                    Game Rules
+                </h4>
+            </div>
+            <div class = "panel-body" id = "rules-body">
+                <!-- Rules go here (link as a text file??) -->
+            </div>
+        </div>
+                        
+        <!-- The central app showing the detector, events, input, and score. It doesn't like detector_core for some reason-->
+
+        <div  id = "app">
+            <!-- Need to have another parent element below as the JSX elements need it. 
+                For some reason the canvases can't seem to go in here though.-->
+
+
+            <div id = "main_app">
+
+
+                <div class = "detector" id="detector-holder">  
+                    <canvas id="detector_core" width = "400" height = "400"> 
+                        <img src = "assets/MuonTracker_whole.png" id = "muon-tracker">
+                    </canvas>
+                    <canvas id = "detector_events" width="400" height="400"></canvas>  
+                </div>  
+                <div class="app_initoutput">
+                    <p id="app_level">
+                        Level: <input value = "1" type = "text" id="app_level_main" disabled/> - <input value = "1" type = "text" id = "app_level_sub" disabled/>
+                    </p>
+                    <p id="app_wrong">
+                        Wrong: <input value = "0" type = "text" id="app_wrong_number" disabled/>/5
+                    </p>
+
+                    <p id="randomNum">
+                        ..
+                    </p>
+          
+                </div>
+                <div class ="app_input">
+                    <table>
+                        <tr>
+                            <div class = "userParticle">
+                                <p>Particles: </p><input type = "text" value = "" id="userParticle" disabled/>
+                            </div>                           
+                        </tr>
+                        <tr>
+                            <div class ="inputbuttons">
+                                <button name = "0" value = "0">0</button>
+                                <button name = "1" value = "1">1</button>
+                                <button name = "2" value = "2">2</button>
+                                <button name = "3" value = "3">3</button>
+                                <button name = "4" value = "4">4</button>
+                                <br>
+                                <button value = "clear" name = "Clear">Clear</button>
+                                <button value = "submit" name = "Submit" >Submit</button>
+                                <button value = "restart" name = "Restart" >Restart</button>
+                            </div>
+                        </tr>
+                    </table>
+                </div>    
+            </div>
+        </div> 
+        <!-- Right-side panel with subdetector info -->
+        <div class = "info" id = "subdet">
+            <div class = "panel-heading">
+                <h4 class = "panel-title">
+                    The Sub-Detectors
+                </h4>
+            </div>
+            <div class = "panel-body" id = "subdet-body">
+                <!-- The text for extra info for each of the subdetectors (link as text files or just insert here?) -->
+                <h5 class = "subdet-head">Silicon Tracker</h5>
+                <p class = "subdet-info" id = "sitr_info">
+                    <!-- Silicon tracker info here -->
+                </p>
+
+                <h5 class = "subdet-head">ECAL</h5>
+                <p class = "subdet-info" id = "ecal_info">
+                    <!-- ECAL info here -->
+                </p> 
+
+                <h5 class = "subdet-head">HCAL</h5>
+                <p class = "subdet-info" id = "hcal_info">
+                    <!-- HCAL info here -->
+                </p>
+
+                <h5 class = "subdet-head">Magnet</h5>
+                <p class = "subdet-info" id = "magnet_info">
+                    <!-- Magnet info here -->
+                </p>
+
+                <h5 class = "subdet-head">Muon Tracker</h5>
+                <p class = "subdet-info" id = "muontr_info">
+                    <!-- Muon tracker info here -->
+                </p>
+            </div>
+        </div>
+    </div>
+
+
+
+<script src="https://unpkg.com/react@17/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+
+<script src = "app.js"></script>
+<script src="detector.js"></script>
+<script src="particle.js"></script>
+
+
+</body>
+
+
+</html>
