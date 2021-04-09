@@ -1,5 +1,3 @@
-//this is the detector.js file - not in React 30/3 update
-//use object intializer to give this variable properties
 var detector = {
 
     core:{
@@ -12,6 +10,7 @@ var detector = {
         canvas: null,
         ctx: null,
         list: [],
+        submitted: false
     },
 
     visible: true,
@@ -33,13 +32,15 @@ var detector = {
     //change the detector to show the full thing instead of quarter sector (so radius is halved)
     radius:
     {
-        silicon: 52,
-        siliconSpace: 54,
-        ecal: 78,
-        ecalSpace: 80,
-        hcal: 118,
-        hcalSpace: 123,
-        magnet: 140
+        silicon: 0.11*400,
+        siliconSpace: 0.116*400,
+        ecal: 0.168*400,
+        ecalSpace: 0.172*400,
+        hcal: 0.254*400,
+        hcalSpace: 0.265*400,
+        magnet: 0.302*400,
+        magnetSpace: 0.312*400,
+        muon: 0.49*400
     },
 
     tracks:
@@ -71,7 +72,7 @@ var detector = {
     ],
 
     //Below is in the particle clicker game, and I guess it devides the time tracks are shown for
-        //but I'm usng something else for that
+        //but I'm using something else for that
     lastRender: 0,
 
     animate: function(time)
@@ -84,8 +85,6 @@ var detector = {
     },
 
 
-    //this is creating a function as a property of an object (called a method)
-    //In this method we are initalising the detector
     init: function(baseSize){
         detector.core.canvas = document.getElementById('detector_core');
         detector.core.ctx = detector.core.canvas.getContext('2d');
@@ -102,10 +101,10 @@ var detector = {
 
         var ratio = devicePixelRatio/backingStoreRatio;
 
-        detector.core.ratio = baseSize/400;
+        detector.ratio = baseSize/400;
 
-        detector.core.width = baseSize;
-        detector.core.height = baseSize;
+        detector.width = baseSize;
+        detector.height = baseSize;
 
         detector.core.canvas.width = baseSize;
         detector.core.canvas.height = baseSize;
@@ -137,7 +136,21 @@ var detector = {
         detector.animate();
 
     },
-
+/*
+    resizeCanvas: function() {
+        var holder = document.getElementById('detector-holder');
+        holderWidth = holder.clientWidth;
+        holderHeight = holder.clientHeight;
+        //coreCanvas = document.getElementById('detector_core')
+        //eventsCanvas = document.getElementById('detector_events')
+        console.log(typeof holderHeight)
+        console.log(typeof holderWidth)
+        detector.core.canvas.width = holderWidth >= holderHeight ? holderWidth : holderHeight;
+        detector.core.canvas.height = holderWidth >= holderHeight ? holderWidth : holderHeight;
+        detector.events.canvas.width = holderWidth >= holderHeight ? holderWidth : holderHeight;
+        detector.events.canvas.height = holderWidth >= holderHeight ? holderWidth : holderHeight;
+    },
+*/
     coreDraw: function()
     {
         
@@ -149,7 +162,7 @@ var detector = {
         ctx.clearRect(0, 0, detector.width, detector.height);
 
         muontracker_image = new Image();
-        muontracker_image.src = 'assets/MuonTracker_whole.png';
+        muontracker_image.src = 'assets/MuonTracker_whole1.png';
         muontracker_image.onload = function(){
             ctx.drawImage(muontracker_image, 0, 0, detector.width, detector.height);
         }
@@ -197,22 +210,19 @@ var detector = {
         ctx.fill();
     },
 
-    //from here it is v questionable
     //draw the events here!
-    //take the random number - from p element detector_events and create array
     handleQuestion: function(){
-        //idk if this is getting the question
-        var question = game.question//document.getElementById('detector_events').value;
-            particles = [];
-            sNumber = question.toString();
+        var question = game.question;
+        var particles = [];
+        var sNumber = question.toString();
 
         for (var i = 0, len = sNumber.length; i < len; i ++){
             particles.push(+sNumber.charAt(i));
         }
 
-        for (var i = 0, len = particles.length; i<len; i++){
+        for (var j = 0, len1 = particles.length; j<len1; j++){
             var index = particles.shift();
-            var event = new ParticleDraw(detector.tracks[index]);
+            var event = new ParticleDraw(detector.tracks[index], detector.events.submitted);
             detector.events.list.push(event)
         }
 
@@ -221,22 +231,35 @@ var detector = {
 
     draw: function(duration){
         detector.events.ctx.clearRect(0, 0, detector.width, detector.height);
-
         var del = -1;
-        for (var e in detector.events.list){
-            if(detector.events.list[e].alpha>0){
-                detector.events.list[e].draw(duration);
+        //if(!detector.events.submitted){
+            for (var e in detector.events.list){
+                if(detector.events.list[e].alpha>0){
+                    detector.events.list[e].draw(duration);
+                }
+                else{
+                    del = e;
+                }
             }
-            else{
-                del = e;
-            }
-        }
+        //}
+
 
         if (del > 0){
             detector.events.list.splice(0, del);
         }
+        
+    },
+
+    clearTracks: function() {
+        detector.events.submitted = true;
+        //detector.handleQuestion();
     }
 };
+
+
+
+//window.onresize = detector.resizeCanvas();
+//windown.onload() = resizeCanvas();
 
 window.requestAnimFrame =(function(){
     return window.requestAnimationFrame         ||
@@ -248,7 +271,6 @@ window.requestAnimFrame =(function(){
                window.setTimeout(callback, 1000/60);
            };
 })();
-
 
 //below the function is wrapped in () to make it an immediately invoked function expressions (or self-executing)
 (function() { detector.init(400); $('#detector').width(400).height(400); })();
