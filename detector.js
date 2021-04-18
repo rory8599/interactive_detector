@@ -18,6 +18,7 @@ var detector = {
     width: 400,
     height: 400,
 
+
     ratio: 1,
 
     colours:
@@ -92,6 +93,22 @@ var detector = {
         detector.events.canvas = document.getElementById('detector_events');
         detector.events.ctx = detector.events.canvas.getContext('2d');
 
+        /*
+            const holder = document.getElementById('detector-holder');
+            var holderWidth = holder.offsetWidth;
+            var holderHeight = holder.offsetHeight;
+            console.log(typeof holderHeight)
+            console.log(typeof detector.height)
+            if (holderWidth > holderHeight){
+                detector.width = holderHeight;
+                detector.height = holderHeight
+            }
+            else{
+                detector.width = holderWidth;
+                detector.height = holderHeight;
+            }
+        */
+
         var devicePixelRatio = window.devicePixelRatio || 1;
         var backingStoreRatio = detector.core.ctx.webkitBackingStorePixelRatio ||
                                 detector.core.ctx.mozBackingStorePixelRatio ||
@@ -100,6 +117,8 @@ var detector = {
                                 detector.core.ctx.backingStorePixelRatio || 1;
 
         var ratio = devicePixelRatio/backingStoreRatio;
+
+        console.log(ratio)
 
         detector.ratio = baseSize/400;
 
@@ -128,10 +147,11 @@ var detector = {
 
             detector.core.ctx.scale(ratio, ratio);
             detector.events.ctx.scale(ratio, ratio);
-
-
         }
 
+        console.log(detector.core.canvas.width)
+        console.log(detector.core.canvas.style.width)
+        console.log(typeof detector.core.canvas.style.width)
         detector.coreDraw();
         detector.animate();
 

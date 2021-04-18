@@ -26,9 +26,8 @@ var game = {
 document.getElementById('start').addEventListener("click", function(){
     document.getElementById('start').style.visibility = 'hidden';
     var coreCanvas = document.getElementById('detector_core')
-    coreCanvas.hidden = false;
+    //coreCanvas.hidden = false;
     document.getElementById('detector_events').hidden = false;
-    //document.getElementsByClassName('inputbuttons').disabled = false;
     coreCanvas.addEventListener("load", randomGenerate(1));
 }, false);
 
@@ -243,6 +242,8 @@ function compareUserInput(userInput) {
     var cx = detector.width/2
     var cy = detector.height/2
 
+    //const infoOpen = false;
+
     //Function to highlight info when over subdetectors
     coreCanvas.addEventListener('click', function(e){
         if(Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.silicon){
@@ -279,18 +280,23 @@ function compareUserInput(userInput) {
                 break;
             case 1:
                 infoSi.style.backgroundColor = 'rgb(220,220, 235)';
+                infoSi.style.display === "block";
                 break;
             case 2:
                 infoEcal.style.backgroundColor = 'rgb(220,220, 235)';
+                infoEcal.style.display === "block";
                 break;
             case 3:
                 infoHcal.style.backgroundColor = 'rgb(220,220, 235)';
+                infoHcal.style.display === "block";
                 break;
             case 4:
                 infoMag.style.backgroundColor = 'rgb(220,220, 235)';
+                infoMag.style.display === "block";
                 break;
             case 5:
                 infoMu.style.backgroundColor = 'rgb(220,220,235';
+                infoMu.style.display === "block";
                 break;
         }
     };
@@ -304,8 +310,38 @@ function compareUserInput(userInput) {
     
 })()
 
+function openRules() {
+    document.getElementById('subdet').style.width = '0px';
+    document.getElementById('rules').style.width = '50%';
+    //infoOpen = true;
+}
 
+function openInfo(){
+    document.getElementById('rules').style.width = '0px';
+    document.getElementById('subdet').style.width = '50%';
+    //infoOpen = true;
+}
 
+function closeNav(){
+    document.getElementById('rules').style.width = '0px';
+    document.getElementById('subdet').style.width = '0px';
+    //infoOpen = false;
+}
+
+var dropdown = document.getElementsByClassName("dropdown_btn");
+var i;
+for (i = 0; i < dropdown.length; i++) {
+    dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+            dropdownContent.style.display = "none";
+        } 
+        else {
+            dropdownContent.style.display = "block";
+        }
+    });
+}
 
 
 function endGame(missed, extra) {
@@ -319,7 +355,7 @@ function endGame(missed, extra) {
 
     let m = game.level.main.displayValue;
         s = game.level.sub.displayValue;
-    document.getElementById('correctParticles').innerHTML = (s-1) * m + 2.5 * m * (m-1) - game.wrong.displayValue;
+    document.getElementById('correctParticles').innerHTML = (s-1) * m + 2.5 * m * (m-1);
 
     if(missed.length>0){
         document.getElementById('missedMessage').hidden = false;
