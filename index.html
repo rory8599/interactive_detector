@@ -5,10 +5,16 @@
 
 
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 
 <title>
     Interactive Detector
 </title>
+
+<link rel="stylesheet" href="bootstrap.min.css">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+
 <link rel = "stylesheet" href = "style.css">
 
 <script>
@@ -27,10 +33,16 @@
 
 <link href= "https://fonts.googleapis.com/css?family=Montserrat" rel= "stylesheet">
 
-    <div class = "container">
+    <div class = "container_">
+
+        <div class="topnav" id="myTopnav">
+            <a href="#rules" id="topnav_rules" onclick="openRules()">&#9776;Rules</a>
+            <a href="#subdet" id="topnav_info" onclick="openInfo()">More Info</a>
+          </div>
         
-        <!-- Left-side panel with rules and general info -->
+        <!-- Left-side panel with rules and general info col-sm-3-->
         <div class = "info" id = "rules">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <!-- Text box for game rules and info -->
             <div class = "panel-heading">
                 <h4 class = "panel-title">
@@ -46,9 +58,9 @@
             </div>
         </div>
                         
-        <!-- The central app showing the detector, events, input, and score. It doesn't like detector_core for some reason-->
+        <!-- The central app showing the detector, events, input, and score. col-sm-6-->
 
-        <div  id = "app">
+        <div  id = "app" class = "main">
             <div id = "main_app">
                 <div class="app_initoutput">
                     <p id="app_level">
@@ -61,11 +73,10 @@
                     <p id="randomNum">
                         ..
                     </p>
-                    
                 </div>
 
                 <div class = "detector" id="detector-holder">  
-                    <canvas id="detector_core" width = "400" height = "400" hidden> 
+                    <canvas id="detector_core" width = "400" height = "400"> 
                         <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
                     </canvas>
                     <canvas id = "detector_events" width="400" height="400" hidden></canvas>  
@@ -92,8 +103,8 @@
 
                     <div class = "endgame" hidden>
                         <p>Better luck next time! <br> 
-                            <p id="correctParticles"></p> particles correctly identified.
-                            <p id="missedMessage" hidden>You missed: <p id = "missedParticles"></p> </p>
+                            <a id="correctParticles"></a> particles correctly identified.
+                            <p id="missedMessage" hidden>You missed: <a id = "missedParticles"></a> </p>
                             <p id="extraMessage" hidden>You incorrectly added: <p id = "extraParticles"></p> </p>
                         </p>
                         <button id = "showAllTracks">Show all particles</button>
@@ -102,8 +113,10 @@
                 </div>  
             </div>
         </div> 
-        <!-- Right-side panel with subdetector info -->
+
+        <!-- Right-side panel with subdetector info   col-sm-3 -->
         <div class = "info" id = "subdet">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
             <div class = "panel-heading">
                 <h4 class = "panel-title">
                     The Sub-Detectors
@@ -111,31 +124,33 @@
             </div>
             <div class = "panel-body" id = "subdet-body">
                 <!-- The text for extra info for each of the subdetectors (link as text files or just insert here?) -->
-                <h5 class = "subdet-head">Silicon Tracker</h5>
+
+                <button class = "dropdown_btn" id = "sitr_dropdown">Silicon Tracker  <i class="fa fa-caret-down"></i></button>
+                <!--<h5 class = "subdet-head">Silicon Tracker</h5>-->
                 <p class = "subdet-info" id = "sitr_info">
                     <!-- Silicon tracker info here -->
                     Silicon pixels make a tiny electrical signal when a particle passes through it, we can detect this and see where particles have been. This can also let us know the momentum of some particles, which is pretty handy for calculations.
                 </p>
-
-                <h5 class = "subdet-head">ECAL</h5>
+                <button class = "dropdown_btn" id = "ecal_dropdown">ECAL  <i class="fa fa-caret-down"></i></button>
+                <!--<h5 class = "subdet-head">ECAL</h5>-->
                 <p class = "subdet-info" id = "ecal_info">
                     <!-- ECAL info here -->
                     This is the electromagnetic calorimeter; it is also known as a scintillator. This means when particles like electrons or photons go through it, they create a flash of light. We can measure this light and from that calculate the energy of the photons and electrons.
                 </p> 
-
-                <h5 class = "subdet-head">HCAL</h5>
+                <button class = "dropdown_btn" id = "hcal_dropdown">HCAL  <i class="fa fa-caret-down"></i></button>
+                <!--<h5 class = "subdet-head">HCAL</h5>-->
                 <p class = "subdet-info" id = "hcal_info">
                     <!-- HCAL info here -->
                     The hadron calorimeter measures the energy of hadrons – these are particles that are made of quarks (like protons or neutrons). The hadrons will go into a thick absorber layer so the hadrons break down into particles that can be detected by a scintillator layer, just like in the electromagnetic calorimeter. 
                 </p>
-
-                <h5 class = "subdet-head">Magnet</h5>
+                <button class = "dropdown_btn" id = "magnet_dropdown">Magnet  <i class="fa fa-caret-down"></i></button>
+                <!--<h5 class = "subdet-head">Magnet</h5>-->
                 <p class = "subdet-info" id = "magnet_info">
                     <!-- Magnet info here -->
                     Magnets are incredibly important in particle detectors; they can control the path of charged particles. This is a very large solenoid magnet which makes a magnetic field that is 100,000 times stronger than the Earth’s!
                 </p>
-
-                <h5 class = "subdet-head">Muon Tracker</h5>
+                <button class = "dropdown_btn" id = "muontr_dropdown">Muon Tracker  <i class="fa fa-caret-down"></i></button>
+                <!--<h5 class = "subdet-head">Muon Tracker</h5>-->
                 <p class = "subdet-info" id = "muontr_info">
                     <!-- Muon tracker info here -->
                     Muons are like electrons but a lot heavier, so they aren’t stopped by the calorimeters. The final part of the detector is designed just to detect muons. The muon trackers show us where the muons have been, then based on how curved the path is we can find the momentum. 
@@ -148,7 +163,9 @@
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-
+<!--
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+-->
 
 <script src="particle.js"></script>
 <script src="detector.js"></script>

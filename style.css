@@ -1,28 +1,21 @@
 body {
-	width: 100%;
+    width: 100vw;
   	margin: 0 auto;
  	background-color: rgb(249,249, 256);
 	padding: 0 20px 20px 20px;
-    font-size: 16px;
-	font-family: 'Montserrat', monospace;
+    font-size: 12px;
+    font-family: 'Montserrat', monospace;
+    overflow: hidden;
 }
 
-.container{
-    display: flex;  /*children are .info (#rules and #subdet) and #app*/
-    justify-content: space-around;
-    /*column-count: 3;*/
-}
-
-#app{
-    flex: 2;
+* {
+    border-radius: 0 !important;
 }
 
 #main_app {    
-    /*children are: #detector-holder, .app_input, .app_initoutput  
-    vertical-align: middle;  */
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(7, 100px);
+    grid-template-rows: repeat(7, 1fr);
     grid-template-areas: 
     "header header"
     "main main"
@@ -33,14 +26,17 @@ body {
     "footer footer";
     grid-gap: 20px;
     grid-auto-flow: dense;
+    height: 95vh;
 }
+
 
 /* The detector canvases */
 #detector-holder{
     grid-area: main;
     display: flex;
+    justify-content: center;   
     align-items: center;
-    justify-content: center;
+
 }
 
 #detector_core{
@@ -73,10 +69,12 @@ body {
 
 #app_level{
     flex: 1 1 auto;
+    float: center;
 }
 
 #app_wrong{
     flex: 1 1 auto;
+    float: center;
 }
 
 .app_levelwrong{
@@ -104,7 +102,12 @@ body {
 .endgame{
     position: absolute;
     align-items: center;
+    text-align: center;
     z-index: 5;
+}
+
+#missedMessage, #extraMessage{
+    text-align: left;
 }
 
     /* The Buttons */
@@ -152,7 +155,6 @@ body {
             cursor: pointer;
             color: rgb(42, 42, 43);
             padding: 8px 30px 9px;
-            font-size: 14px;
             text-transform: uppercase;
             text-align: center;
             transition-duration: 0.2s;
@@ -171,14 +173,59 @@ body {
     /* Start button */
     #start{
         align-items: center;
+        z-index: 5;
     }
         
 /* The surrounding info */
-.info{
-    flex: 1;
-    border: 1px solid rgb(170, 170, 170);
-    background-color: rgb(248,248,255);
+
+#rules {
+    height: 100%;
+    width: 0;
+    position: fixed;
     z-index: 9;
+    top: 0;
+    left: 0;
+    background-color: rgb(209, 209, 209);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+#subdet{
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    right: 0;
+    background-color: rgb(209, 209, 209);
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+}
+
+.subdet-info{
+    display: none;
+    padding-left: 12px;
+}
+
+.fa-caret-down {
+    float: right;
+    padding-right: 8px;
+}
+
+.dropdown_btn{
+    width: 100%;
+    text-align: left;
+    padding-left: 8px;
+}
+
+.info .closebtn{
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
 }
 
 .panel-heading{
@@ -186,11 +233,12 @@ body {
 }
 
 h4{
+    font-size: 18px;
     text-align: center;
 }
 
 h5{
-    font-size: 18px;
+    font-size: 15px;
     margin-block-end: 0.2em;
 }
 
@@ -199,35 +247,8 @@ h5{
 }
 
 .panel-body{
-    height: 400px;
     color: rgb(73, 73, 73);
-    font-size: 12px;
-}
-
-#rules{
-    float:left;
-    z-index: 10
-}
-
-#rules-body{
-    font-size: 16px;
     text-align: center;
-}
-
-#subdet{
-    float: right;
-}
-
-.app_level {
-	float: left;
-    color: rgb(230, 188, 63);
-    z-index: 10;
-}
-
-.app_wrong {
-	float: right;
-    color: rgb(228, 89, 87);
-    z-index: 10;
 }
 
 input {
@@ -237,10 +258,106 @@ input {
 	padding: 8px 5px 0px 0;
 	background: transparent;
 	color: rgb(73, 73, 73);
-	font-size: 18px;
+	font-size: 14px;
     /*border-bottom: 1px dotted rgb(122, 148, 140);*/
     text-align: center;
 }
+    
+#topnav_info{
+    float: right;
+}
+
+/*Responsive*/
+/*Phone*/
+@media screen and (max-width: 767px) {
+    body{
+        font-size: 12px;
+    }
+
+    .topnav{
+        display: block;
+    }
+
+    .col-sm-6{
+        width: 100%;
+    }
+}
+
+@media screen and (orientation:landscape) and (max-width: 991px){
+    #main_app {    
+        display: grid; 
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        grid-template-areas: 
+        "main header"
+        "main header"
+        "main footer"
+        "main footer"
+        "main footer"
+        "main footer"
+        "main footer";
+        grid-gap: 20px;
+        grid-auto-flow: dense;
+        height: 95vh;
+    }
+
+    .app_input{
+        flex-flow: column nowrap;
+    }
+}
+
+/*Tablet*/
+@media screen and (min-width: 768px) {
+    #detector-holder {
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    .info{
+        max-width: 384px;
+    }
+    .col-sm-6{
+        width: 100%;
+    }
+
+}
+
+/*Small desktop*/
+@media screen and (min-width: 992px) {
+        
+    .topnav{
+        display: none;
+    }
 
 
+    #main_app{
+        height: 100vh;
+    }
+
+    .container_{
+        display: flex;  
+        justify-content: space-around;
+    }    
+
+    #app{
+        width: 50%;
+    }
+
+    #rules, #subdet{
+        flex: 1;
+        /*border: 1px solid rgb(170, 170, 170);*/
+        background-color: rgb(248,248,255);
+        z-index: 9;
+        width: 25%;   
+    }
+
+    .info .closebtn{
+        display: none;
+    }
+}
+
+/*Large desktop*/
+@media screen and (min-width: 1200px) {
+    /*Set the detector canvas to 500x500*/
+}
 
