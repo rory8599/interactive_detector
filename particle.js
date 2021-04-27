@@ -58,7 +58,7 @@ ParticleDraw.prototype.draw = function(duration, init, submitted){
     ctx.globalAlpha = this.alpha;
     ctx.strokeStyle = this.type.color;
     ctx.fillStyle = this.type.color;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 5;
     
     ctx.translate(cx, cy);
     ctx.rotate(this.direction);

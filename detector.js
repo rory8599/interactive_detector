@@ -15,9 +15,8 @@ var detector = {
 
     visible: true,
 
-    width: 400,
-    height: 400,
-
+    width: 1200,
+    height: 1200,
 
     ratio: 1,
 
@@ -27,21 +26,21 @@ var detector = {
         ecal: '#9AD35F',   
         hcal: '#D6EB58',
         magnet:'#89877B',
-        background: 'rgb(236, 236, 236)'
+        background: 'rgb(250, 255, 255)'
     },
     //radius here goes to the outer edge of the respective subdetector boundary
     //change the detector to show the full thing instead of quarter sector (so radius is halved)
     radius:
     {
-        silicon: 0.11*400,
-        siliconSpace: 0.116*400,
-        ecal: 0.168*400,
-        ecalSpace: 0.172*400,
-        hcal: 0.254*400,
-        hcalSpace: 0.265*400,
-        magnet: 0.302*400,
-        magnetSpace: 0.312*400,
-        muon: 0.49*400
+        silicon: 0.11*1200,
+        siliconSpace: 0.116*1200,
+        ecal: 0.168*1200,
+        ecalSpace: 0.172*1200,
+        hcal: 0.254*1200,
+        hcalSpace: 0.265*1200,
+        magnet: 0.302*1200,
+        magnetSpace: 0.312*1200,
+        muon: 0.49*1200
     },
 
     tracks:
@@ -72,8 +71,6 @@ var detector = {
         }
     ],
 
-    //Below is in the particle clicker game, and I guess it devides the time tracks are shown for
-        //but I'm using something else for that
     lastRender: 0,
 
     animate: function(time)
@@ -85,29 +82,12 @@ var detector = {
         detector.draw(duration);
     },
 
-
     init: function(baseSize){
         detector.core.canvas = document.getElementById('detector_core');
         detector.core.ctx = detector.core.canvas.getContext('2d');
 
         detector.events.canvas = document.getElementById('detector_events');
         detector.events.ctx = detector.events.canvas.getContext('2d');
-
-        /*
-            const holder = document.getElementById('detector-holder');
-            var holderWidth = holder.offsetWidth;
-            var holderHeight = holder.offsetHeight;
-            console.log(typeof holderHeight)
-            console.log(typeof detector.height)
-            if (holderWidth > holderHeight){
-                detector.width = holderHeight;
-                detector.height = holderHeight
-            }
-            else{
-                detector.width = holderWidth;
-                detector.height = holderHeight;
-            }
-        */
 
         var devicePixelRatio = window.devicePixelRatio || 1;
         var backingStoreRatio = detector.core.ctx.webkitBackingStorePixelRatio ||
@@ -118,9 +98,7 @@ var detector = {
 
         var ratio = devicePixelRatio/backingStoreRatio;
 
-        console.log(ratio)
-
-        detector.ratio = baseSize/400;
+        detector.ratio = baseSize/1200;
 
         detector.width = baseSize;
         detector.height = baseSize;
@@ -149,28 +127,10 @@ var detector = {
             detector.events.ctx.scale(ratio, ratio);
         }
 
-        console.log(detector.core.canvas.width)
-        console.log(detector.core.canvas.style.width)
-        console.log(typeof detector.core.canvas.style.width)
         detector.coreDraw();
         detector.animate();
+    },
 
-    },
-/*
-    resizeCanvas: function() {
-        var holder = document.getElementById('detector-holder');
-        holderWidth = holder.clientWidth;
-        holderHeight = holder.clientHeight;
-        //coreCanvas = document.getElementById('detector_core')
-        //eventsCanvas = document.getElementById('detector_events')
-        console.log(typeof holderHeight)
-        console.log(typeof holderWidth)
-        detector.core.canvas.width = holderWidth >= holderHeight ? holderWidth : holderHeight;
-        detector.core.canvas.height = holderWidth >= holderHeight ? holderWidth : holderHeight;
-        detector.events.canvas.width = holderWidth >= holderHeight ? holderWidth : holderHeight;
-        detector.events.canvas.height = holderWidth >= holderHeight ? holderWidth : holderHeight;
-    },
-*/
     coreDraw: function()
     {
         
@@ -235,51 +195,41 @@ var detector = {
         var question = game.question;
         var particles = [];
         var sNumber = question.toString();
-
         for (var i = 0, len = sNumber.length; i < len; i ++){
             particles.push(+sNumber.charAt(i));
         }
 
         for (var j = 0, len1 = particles.length; j<len1; j++){
             var index = particles.shift();
-            var event = new ParticleDraw(detector.tracks[index], detector.events.submitted);
+            var event = new ParticleDraw(detector.tracks[index]);
             detector.events.list.push(event)
         }
-
     },
 
 
     draw: function(duration){
         detector.events.ctx.clearRect(0, 0, detector.width, detector.height);
         var del = -1;
-        //if(!detector.events.submitted){
             for (var e in detector.events.list){
                 if(detector.events.list[e].alpha>0){
+                    if(detector.events.submitted){
+                        for(var i = 0; i < (detector.events.list.length - game.level.main.displayValue); i++){
+                            detector.events.list[i].alpha = 0;
+                        }
+                    }
                     detector.events.list[e].draw(duration);
                 }
                 else{
                     del = e;
                 }
             }
-        //}
-
 
         if (del > 0){
             detector.events.list.splice(0, del);
         }
-        
-    },
-
-    clearTracks: function() {
-        detector.events.submitted = true;
-        //detector.handleQuestion();
     }
 };
 
-
-
-//window.onresize = detector.resizeCanvas();
-//windown.onload() = resizeCanvas();
 
 window.requestAnimFrame =(function(){
     return window.requestAnimationFrame         ||
@@ -293,4 +243,4 @@ window.requestAnimFrame =(function(){
 })();
 
 //below the function is wrapped in () to make it an immediately invoked function expressions (or self-executing)
-(function() { detector.init(400); $('#detector').width(400).height(400); })();
+(function() { detector.init(1200); $('#detector').width(1200).height(1200); })();

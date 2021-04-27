@@ -1,15 +1,17 @@
 body {
     width: 100vw;
   	margin: 0 auto;
- 	background-color: rgb(249,249, 256);
-	padding: 0 20px 20px 20px;
-    font-size: 12px;
-    font-family: 'Montserrat', monospace;
+ 	background-color: rgb(250, 255, 255);
+    font-size: 10px;
+    /* font-family: 'Montserrat', monospace; 
+    font-family: 'Roboto', sans-serif;*/
+    Font-Family: 'Lato', Sans-Serif;
     overflow: hidden;
 }
 
 * {
     border-radius: 0 !important;
+    box-sizing: border-box;
 }
 
 #main_app {    
@@ -29,225 +31,510 @@ body {
     height: 95vh;
 }
 
-
 /* The detector canvases */
-#detector-holder{
-    grid-area: main;
-    display: flex;
-    justify-content: center;   
-    align-items: center;
+    #detector-holder{
+        grid-area: main;
+        display: flex;
+        justify-content: center;   
+        align-items: center;
+    }
 
-}
+    #detector_core{
+        position: absolute;
+        z-index: 0;
+    }
 
-#detector_core{
-    position: absolute;
-    z-index: 0;
-}
+    #detector_events{
+        position: absolute;
+        z-index: 3;
+    }
 
-#detector_events{
-    position: absolute;
-    z-index: 3;
-}
+    .responsive-canvas{
+        height: 75vw;
+        width: 75vw;
+        max-height: 500px;
+        max-width: 500px;
+    }
 
-#muon-tracker{
-    display: none;
-}
+    #muon-tracker{
+        display: none;
+    }
 
 /* The Level and Wrong displays*/ 
 
-#randomNum{
-    display: none;
-}
+    .app_initoutput{
+        grid-area: header;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-areas: 
+        "level wrong";
+        background-color: rgb(250,250,250);
+        margin: 15px;
+        padding: 1%;
+        text-align: center;
+        justify-items: center;
+        align-self: center;
+        font-size: 150%;
+        z-index: 4;
+    }
 
-.app_initoutput{
-    grid-area: header;
-    display: flex;
-    flex: row nowrap;
-    align-items: center;
-    justify-content: space-around;
-}
+    #app_level{
+        grid-area: level;
+        margin: 8% 5%;
+    }
 
-#app_level{
-    flex: 1 1 auto;
-    float: center;
-}
+    #app_wrong{
+        grid-area: wrong;
+        margin: 8% 5%;
+    }
 
-#app_wrong{
-    flex: 1 1 auto;
-    float: center;
-}
-
-.app_levelwrong{
-    width: 15px;
-}
+    .app_levelwrong{
+        width: 20px;
+    }
 
 /* The Input area - buttons and particle display */
-.app_input{
-    grid-area: footer;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-    justify-content: space-around;
-}
-
-.userParticle{
-    flex: 1 1 auto;
-}
-
-#userParticle{
-    width: 90%;
-    height: 100px;
-}
-
-.endgame{
-    position: absolute;
-    align-items: center;
-    text-align: center;
-    z-index: 5;
-}
-
-#missedMessage, #extraMessage{
-    text-align: left;
-}
-
-    /* The Buttons */
-    .inputbuttons{
-        flex: 1 1 auto;
-        display: grid;
-        grid-template-columns: repeat(6, 1fr);
-        grid-template-rows: repeat(3, 40px);
-        grid-template-areas: 
-        "photon photon electron electron muon muon"
-        "nhadron nhadron nhadron chadron chadron chadron"
-        "clear clear submit submit restart restart";
-    }
-
-    #photon{
-        grid-area: photon;
-    }
-    #electron{
-        grid-area: electron;
-    }
-    #muon{
-        grid-area: muon;
-    }    
-    #nhadron{
-        grid-area: nhadron;
-    }
-    #chadron{
-        grid-area: chadron;
-    }
-    #clear{
-        grid-area: clear;
-    }
-    #submit{
-        grid-area: submit;
-    }
-    #restart{
-        grid-area: restart;
-    }
-
-        /* Button style and animation */
-        button {
-            background: transparent;
-            border: 1px dashed rgba(250,250,255,1);
-            outline: none;
-            cursor: pointer;
-            color: rgb(42, 42, 43);
-            padding: 8px 30px 9px;
-            text-transform: uppercase;
-            text-align: center;
-            transition-duration: 0.2s;
-        }
-
-        button:hover {
-            background-color: rgba(200, 200, 210, 1);
-        }
-
-        button:active {
-            background-color: rgba(150, 150, 160, 1);
-            transform: scale(0.9, 0.9);
-            transition-duration: 0.2s;
-        }
-
-    /* Start button */
-    #start{
+    .app_input{
+        grid-area: footer;
+        display: flex;
+        flex-flow: row nowrap;
         align-items: center;
+        justify-content: space-around;
+        z-index: 4;
+        background-color: rgb(250,250,250);
+        margin: 15px;
+        padding: 5%;
+    }
+
+    .userParticle{
+        flex: 1 1 auto;
+    }
+
+    #userParticle{
+        width: 90%;
+        height: 10vh;
+        max-height: 12vh;
+        overflow: auto;
+        font-size: 125%;
+    }
+
+    .endgame{
+        position: absolute;
+        align-items: center;
+        text-align: center;
         z-index: 5;
     }
-        
+
+    #missedMessage, #extraMessage{
+        text-align: left;
+    }
+
+    /* The Buttons */
+        .inputbuttons{
+            width: 70%;
+            flex: 1 1 auto;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            grid-template-rows: repeat(3, 40px);
+            grid-template-areas: 
+            "photon photon electron electron muon muon"
+            "nhadron nhadron nhadron chadron chadron chadron"
+            "clear clear submit submit restart restart";
+        }
+
+        #photon{
+            grid-area: photon;
+        }
+        #electron{
+            grid-area: electron;
+        }
+        #muon{
+            grid-area: muon;
+        }    
+        #nhadron{
+            grid-area: nhadron;
+        }
+        #chadron{
+            grid-area: chadron;
+        }
+        #clear{
+            grid-area: clear;
+        }
+        #submit{
+            grid-area: submit;
+        }
+        #restart{
+            grid-area: restart;
+        }
+
+        /* Button style and animation */
+            button {
+                background: rgba(230,230,230, 0.6);
+                border: 1px solid rgba(200,200,215,1);
+                cursor: pointer;
+                color: rgb(42, 42, 43);
+                padding: 3px;
+                text-transform: uppercase;
+                text-align: center;
+                transition-duration: 0.2s;
+                font-size: 2vmin;
+            }
+
+            #clear, #submit, #restart{
+                background: rgba(210,210,230, 0.9)
+            }
+
+            #start{
+                width: 15vmin;
+                height: 8vmin;
+                border: 3px solid rgba(255, 255, 255, 0.8);
+                box-shadow: 0px 0px 15px 210px rgba(255, 255, 255, 0.7);
+            }
+
+            #start {
+                position: relative;
+                overflow: hidden;
+              }
+              
+              #start a {
+                position: relative;
+                transition: all .45s ease-Out;
+                font-size: 150%;
+              }
+              
+              #circle {
+                width: 0%;
+                height: 0%;
+                opacity: 0;
+                line-height: 40px;
+                border-radius: 50% !important;
+                background: rgba(157, 157, 175, 0.74);
+                position: absolute;
+                transition: all .5s ease-Out;
+                top: 20px;
+                left: 70px;
+              }
+              
+              #start:hover #circle {
+                width: 200%;
+                height: 500%;
+                opacity: 1;
+                top: -70px;
+                left: -70px;
+              }
+              
+              #start:hover a {
+                color: #292929;
+              }
+
+            button:hover {
+                background-color: rgb(200, 200, 210);
+                transform: scale(0.95, 0.95);
+            }
+
+            button:active {
+                background-color: rgb(150, 150, 160);
+                transform: scale(0.9, 0.9);
+            }
+
+            
 /* The surrounding info */
 
+.info{
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 9;
+    top: 0;
+    border-right: 2px solid rgba(200, 200, 200, 0.5);
+    border-left: 2px solid rgba(200, 200, 200, 0.5);
+    background-color: rgb(252, 252, 252);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.info a{
+    text-decoration: none;
+    color: black;
+    text-transform: uppercase;
+    font-size: 85%;
+    text-shadow: 0 0 2px gray;
+}
+
+.info a:hover{
+    opacity: 0.6;
+}
+
+.info a:visited{
+    color: #1F5673;
+}
+
 #rules {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 9;
-    top: 0;
     left: 0;
-    background-color: rgb(209, 209, 209);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+    display: grid;
+    grid-template-columns: 1;
+    grid-template-rows: 1fr 2fr;
+    grid-template-areas: 
+    "rules"
+    "links";
 }
 
-#subdet{
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 9;
-    top: 0;
-    right: 0;
-    background-color: rgb(209, 209, 209);
-    overflow-x: hidden;
-    transition: 0.5s;
-    padding-top: 60px;
+#rules-body{
+    grid-area: rules;
+    overflow-y: scroll;
 }
 
-.subdet-info{
-    display: none;
-    padding-left: 12px;
-}
-
-.fa-caret-down {
-    float: right;
-    padding-right: 8px;
-}
-
-.dropdown_btn{
-    width: 100%;
-    text-align: left;
-    padding-left: 8px;
-}
-
-.info .closebtn{
-    position: absolute;
-    top: 0;
-    right: 25px;
-    font-size: 36px;
-    margin-left: 50px;
-}
-
-.panel-heading{
-    color: rgb(32, 32, 32);
-}
-
-h4{
-    font-size: 18px;
+#rules-text{
+    padding: 10px 25px;
     text-align: center;
 }
 
-h5{
-    font-size: 15px;
-    margin-block-end: 0.2em;
+#links-body{
+    grid-area: links;
+    overflow-y: scroll;
 }
 
-.panel-title{
-    font-family: 'Montserrat';
+#linksMain{
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
 }
 
-.panel-body{
-    color: rgb(73, 73, 73);
+.linksHeader{
+    font-size: 120%;
+    Font-Family: 'Roboto', Sans-Serif;
+    padding: 0px 15px;
+}
+
+.linksText{
+    padding: 0px 10px;
+}
+
+#cernLinks{
+    list-style-type: none;
+    padding: 0 0 0 8px;
+}
+
+#cernLinks a{
+    padding-left: 6px;
+}
+
+hr.rounded{
+    border-top: 8px solid #bbb;
+    border-radius: 5px !important;
+    width: 90%;
+}
+
+#socialLinks{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    justify-items: center;
+}
+
+.socialLogo{
+    width: 5vmin;
+    height: 5vmin;
+    box-shadow: 0 0 10px 1px lightgray;
+}
+/*
+.fa {
+    padding-top: 3%;
+    font-size: 3vmin !important;
+    width: 5vmin;
+    height: 5vmin;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50% !important;
+    margin: 5px 2px;
+}
+  
+.fa:hover {
+    opacity: 0.7;
+}
+
+.fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.fa-youtube {
+    background: #bb0000;
+    color: white;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+*/
+/* The right panel with subdetector/particle info */
+#moreInfo{
+    right: 0;
+}
+
+#info_body{
+    height: 100vh;
+}
+
+.infoTabsContainer{
+    display: none;
+    z-index: 14;
+}
+
+/* Content of the panels */
+    .panel-title{
+        background-color: rgb(240, 240, 240);
+        border-top: 2px solid rgba(200, 200, 200, 0.5);
+        border-bottom: 2px solid rgba(200, 200, 200, 0.5);
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: sticky;
+        top: -1px;
+        z-index: 13;
+    }
+
+    #particlesTitle{
+        top: 50%;
+    }
+
+    .subdetTab, .particlesTab{
+        display: none;
+        max-height: 40vh;
+        grid-template-columns: 1;
+        grid-template-rows: 1fr 4fr;
+        grid-template-areas: 
+        "title"
+        "main";
+    }
+
+    .subdetTab h3, .particlesTab h3{
+        grid-area: title;
+        max-height: 5vh;
+        z-index: 13;
+        padding: 0 20px;
+        Font-Family: 'Roboto', Sans-Serif;
+    }
+
+    .subdetTab .tabText, .particlesTab .tabText{
+        grid-area: main;
+        margin: 0;
+        max-height: 100%;
+        z-index: 12;
+        padding: 10px 30px 10px 15px;
+        text-shadow: 0 0 10px white;
+        overflow-y: scroll;
+    }
+
+    .subdetImage{
+        opacity: 0.65;
+        position: absolute;
+        right: -70%;
+        top: 44px;
+        z-index: 10;
+        width: 140%;
+        max-height: 45vh;
+        object-fit: cover;
+        object-position: 0% 100%;
+    }
+
+    #muonHL{
+        opacity: 0.3;
+    }
+
+    /* Deal with the tabs on the panel for the particles and subdetectors */
+        .nextPrevBtnInfo{
+            display: grid;
+            grid-template-columns: 1fr 4fr 1fr;
+            grid-template-areas: 
+            "prev tabs next";
+            position: absolute;
+            width: 100%;
+            background-color: rgb(252, 252, 252);
+            z-index: 13;
+        }
+
+        #nextPrevBtnSubdet{
+            bottom: 50vh;
+        }
+
+        #nextPrevBtnParticle{
+            bottom: 1px;
+        }
+
+        #prevSubdet, #prevParticle{
+            grid-area: prev;
+            align-self: center;
+        }
+
+        .tabIndicator{
+            grid-area: tabs;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #nextSubdet, #nextParticle{
+            grid-area: next;
+            justify-self: stretch;
+            align-self: center;
+        }
+
+        .tabButton{
+            background-color: rgb(252, 252, 252);
+            border: none;
+        }
+
+
+        .subdetStep, .particleStep{
+            height: 8px;
+            width: 8px;
+            background-color: #bbb;
+            display: inline-block;
+            opacity: 0.5;
+        }
+
+        .subdetStep.active, .particleStep.active{
+            opacity: 1;
+            height: 15px;
+            width: 15px;
+        }
+
+        .arrow{
+            border: solid black;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+        }
+
+        .right{
+            transform: rotate(-45deg);
+            -webkit-transform: rotate(-45deg);
+        }
+
+        .left{
+            transform: rotate(135deg);
+            -webkit-transform: rotate(135deg);
+        }
+
+    .info .closebtn{
+        position: absolute;
+        z-index: 15;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: gray;
+        text-decoration: none;
+    }
+
+    .info .closebtn:hover{
+        color: black;
+    }
+
+h4{
+    margin: 10px 0px;
+    font-size: 22px;
     text-align: center;
 }
 
@@ -257,33 +544,216 @@ input {
 	margin: 0 0 20px 3px;
 	padding: 8px 5px 0px 0;
 	background: transparent;
-	color: rgb(73, 73, 73);
-	font-size: 14px;
-    /*border-bottom: 1px dotted rgb(122, 148, 140);*/
     text-align: center;
+    font-size: 100%;
+    color: black;
 }
-    
+
+.topnav{
+    display: block;
+    padding: 10px 40px;
+    width: 100vw;
+    /*background-color: rgba(220,225,225,0.8);*/
+    background-image: linear-gradient(rgba(240,240,240,0.8),rgba(220,220,220,0.8));
+    box-shadow: 0 2px 15px 2px #c5c5c5;
+    z-index: 20;
+}
+
+#topnav_info, #topnav_rules{
+    color: black;
+    text-decoration: none;
+    font-size: 125%;
+}
+
 #topnav_info{
     float: right;
 }
+
+/*Style for the multi-step introduction*/
+    #introPopup {
+        background-color: #ffffff;
+        box-shadow: 0 0 5px 5px #bbbbbb;
+        margin: 5% auto;
+        padding: 40px;
+        width: 90%;
+        height: 90vh;
+        z-index: 10;
+        position: fixed;
+        left: 5%;        
+    }
+    
+    h1 {
+        Font-Family: 'Roboto', Sans-Serif;
+
+        text-align: center;  
+    }
+    
+    /* Hide all steps by default: */
+    .tab {
+        display: none;
+        grid-template-rows: fit-content;
+        grid-template-areas: 
+        "header"
+        "main"
+        "image";
+        height: 60%;
+    }
+
+    #finalTab{
+        grid-template-areas: 
+        "header"
+        "main";
+        font-size: 120%;
+    }
+
+    .tabHeader{
+        grid-area: header;
+        font-size: 150%;
+        padding: 0 20px;
+        margin-bottom: 10px;
+    }
+
+    .tabText{
+        grid-area: main;
+        display: inline;
+        margin: 10px;
+        overflow-y: scroll;
+        height: 100%;
+    }
+
+    .tabImage{
+        grid-area: image;
+        align-self: center;
+        width: 70vw;
+        height: 35vh;
+        object-fit: contain;
+        align-items: center;
+        justify-self: center;
+        margin: 0px;
+    }
+
+    #altStandardModel{
+        height: 30vh;
+    }
+
+    .nextPrevBtn{
+        position: absolute;
+        bottom: 4vh;
+        right: 3vw;
+    }
+    
+    .popupButton {
+        background-color: #1F5673;
+        color: #ffffff;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        position: sticky;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    button:hover {
+        opacity: 0.8;
+    }
+    
+    #prevBtn {
+        background-color: #bbbbbb;
+        right: 150px;
+    }
+
+    .introTabs{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .step {
+        height: 15px;
+        width: 30px;
+        background-color: #bbbbbb;
+        border: none;  
+        display: inline-block;
+        opacity: 0.5;
+    }
+    
+    .step.active {
+        opacity: 1;
+        height: 30px;
+    }
+    
+    /* Mark the steps that are finished and valid: */
+    .step.finish {
+        background-color: #1F5673;
+    }
+
+    #closePopup{
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+        color: gray;
+        text-decoration: none;
+    }
+
+    #closePopup:hover{
+        color: black;
+    }
 
 /*Responsive*/
 /*Phone*/
 @media screen and (max-width: 767px) {
     body{
-        font-size: 12px;
-    }
-
-    .topnav{
-        display: block;
+        font-size: 15px;
     }
 
     .col-sm-6{
         width: 100%;
     }
+
+    #info_body{
+        display: grid;
+        grid-template-columns: 1;
+        grid-template-rows: 2;
+        grid-template-areas: 
+        "subdet"
+        "particle"; 
+    }
+
+    #subdetBody{
+        grid-area: subdet;
+        height: 50vh;
+    }
+
+    #particleBody{
+        grid-area: particle;
+        height: 50vh;
+    }
 }
 
+/*Phone and tablet when landscape*/
 @media screen and (orientation:landscape) and (max-width: 991px){
+    .tab {
+        grid-template-rows: 1fr 5fr;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas: 
+        "header header"
+        "main image";
+        height: 50vh;
+    }
+    #finalTab{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 5fr;
+    }
+
+    .tabImage{
+        width: 40vw;
+        justify-self: center;
+        align-self: baseline;
+        margin-bottom: 10px;
+    }
+    
     #main_app {    
         display: grid; 
         grid-template-columns: repeat(2, 1fr);
@@ -304,10 +774,93 @@ input {
     .app_input{
         flex-flow: column nowrap;
     }
+
+    .responsive-canvas{
+        height: 50vw;
+        width: 50vw;      
+        max-height: 400px;  
+        max-width: 400px;
+    }
+
+    .infoTabsContainer {
+        display: inline;
+        overflow: hidden;
+    }
+    
+    .infoTabsContainer button {
+        background-color: rgba(240,240,240,1);
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        padding: 14px 16px;
+        transition: 0.3s;
+        font-size: 17px;
+        height: 44px;
+    }
+    
+    .infoTabsContainer button:hover {
+        background-color: #ddd;
+    }
+    
+    .infoTabsContainer button.active {
+        background-color: rgba(252, 252, 252, 0.4);
+    }
+
+    .moreInfoForm{
+        margin-top: 40px;
+    }
+
+    .nextPrevBtnInfo{
+        height: 50px;
+    }
+
+    .tabHeader{
+        font-size: 225%;
+    }
+
+    .info .tabText{
+        font-size: 150%;
+        height: 70vh;
+    }
+    
+    .infoTabContent {
+        display: none;
+        padding: 6px 12px;
+        -webkit-animation: fadeEffect 1s;
+        animation: fadeEffect 1s;
+    }
+    
+    @-webkit-keyframes fadeEffect {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+    
+    @keyframes fadeEffect {
+        from {opacity: 0;}
+        to {opacity: 1;}
+    }
+
+    #nextPrevBtnSubdet{
+        bottom: 1px;
+    }
+    
+    .infoTabContent .panel-title{
+        display: none;
+    }
+
+    .socialLogo{
+        width: 8vmin;
+        height: 8vmin;
+    }
 }
 
 /*Tablet*/
 @media screen and (min-width: 768px) {
+    body{
+        font-size: 14px;
+    }
+
     #detector-holder {
         margin-left: -15px;
         margin-right: -15px;
@@ -316,22 +869,58 @@ input {
     .info{
         max-width: 384px;
     }
-    .col-sm-6{
-        width: 100%;
+
+    #subdetBody, #particleBody{
+        height: 50vh;
     }
 
+    .tab .tabText{
+        font-size: 150%;
+    }
 }
 
 /*Small desktop*/
 @media screen and (min-width: 992px) {
-        
+    .tab {
+        grid-template-rows: 1fr 5fr;
+        grid-template-columns: 3fr 2fr;
+        grid-template-areas: 
+        "header header"
+        "main image";
+        height: 50vh;
+    }
+
+    #finalTab{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 5fr;
+        grid-template-areas: 
+        "header"
+        "main";
+        font-size: 130%;
+    }
+
+    .tabImage{
+        width: 40vw;
+        justify-self: center;
+        align-self: baseline;
+        margin-bottom: 10px;
+    }
+
+    body{
+        font-size: 16px;
+    }
+
     .topnav{
         display: none;
     }
 
-
     #main_app{
         height: 100vh;
+    }
+    
+    .responsive-canvas{    
+        max-height: 450px;  
+        max-width: 450px;
     }
 
     .container_{
@@ -343,10 +932,8 @@ input {
         width: 50%;
     }
 
-    #rules, #subdet{
+    #rules, #moreInfo{
         flex: 1;
-        /*border: 1px solid rgb(170, 170, 170);*/
-        background-color: rgb(248,248,255);
         z-index: 9;
         width: 25%;   
     }
@@ -354,10 +941,25 @@ input {
     .info .closebtn{
         display: none;
     }
+
+    button{
+        font-size: 1.5vmin;
+    }
 }
 
 /*Large desktop*/
 @media screen and (min-width: 1200px) {
-    /*Set the detector canvas to 500x500*/
+    body{
+        font-size: 18px;
+    }
+    h4{
+        Font-Family: 'Roboto', Sans-Serif;
+
+        font-size: 24px;
+    }
+    .responsive-canvas{    
+        max-height: 500px;  
+        max-width: 500px;
+    }
 }
 
