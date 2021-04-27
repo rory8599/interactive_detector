@@ -71,14 +71,15 @@ function handleClear() {
 };
 
 function handleSubmit() {
+    detector.events.submitted = true;
     let userInput = game.input.displayValue;
     compareUserInput(userInput);
     game.input.displayValue = "";
     document.getElementById('userParticle').value = "";
-    detector.clearTracks();
 };
 
 function handleRestart() {
+    detector.events.submitted = true;
     game.allQuestions = "";
     game.input.displayValue = "";
     for(var i=0; i<buttons.length; i++){
@@ -107,8 +108,8 @@ function updateDisplay() {
     for(var i = 0; i < number.length; i++){
         userInput.push(+number.charAt(i));
     }
-
     display.value = numberToParticle(userInput)
+    display.scrollTop = display.scrollHeight;
 };
 
 function numberToParticle(numberArray) {
@@ -153,18 +154,16 @@ function updateWrong() {
 
 
 //Generate random number - creates outputs
-function randomGenerate(number) {
+function randomGenerate(number) {    
     let max = Math.pow(5, number) - 1;
     let min = Math.pow(5, (number - 1));
     let rand = Math.floor(Math.random()*(max-min+1))+min;
     game.question = rand.toString(5);
     detector.handleQuestion();
-
 };
 
 
 function compareUserInput(userInput) {
-
     let question = game.question;
     let allParticles = game.allQuestions;
     game.allQuestions = allParticles.concat(question);
@@ -172,8 +171,7 @@ function compareUserInput(userInput) {
     let questionArray = question.split("").sort();
     let numberWrong = 0; 
     var wrongArray = [];
-//in order to show correct number os particle sidentified we need to keep track of number wrong
-//either discount all particles as wrong if there is no match or try and give a point for those right
+
     function checkForMatch(userInputArray, questionArray) {
         if(userInputArray.length < questionArray.length)
             {numberWrong += questionArray.length - userInputArray.length};
@@ -226,123 +224,6 @@ function compareUserInput(userInput) {
     }
 
 };
-
-(function mouseOver(){
-
-    var onObject = 0;
-
-    var infoSi = document.getElementById('sitr_info');
-    var infoEcal = document.getElementById('ecal_info');
-    var infoHcal = document.getElementById('hcal_info');
-    var infoMag = document.getElementById('magnet_info');
-    var infoMu = document.getElementById('muontr_info');
-
-    let coreCanvas = detector.events.canvas
-    //let ctx = detector.events.ctx
-    var cx = detector.width/2
-    var cy = detector.height/2
-
-    //const infoOpen = false;
-
-    //Function to highlight info when over subdetectors
-    coreCanvas.addEventListener('click', function(e){
-        if(Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.silicon){
-            onObject = 1;
-        }
-        else if((Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.ecal)&
-        Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) > detector.radius.siliconSpace){
-            onObject = 2;
-        }
-        else if((Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.hcal)&
-        Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) > detector.radius.ecalSpace){
-            onObject = 3;
-        }
-        else if((Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.magnet)&
-        Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) > detector.radius.hcalSpace){
-            onObject = 4
-        }
-        else if((Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) < detector.radius.muon)&
-        Math.sqrt((e.offsetX - cx)*(e.offsetX - cx) + (e.offsetY - cy)*(e.offsetY - cy)) > detector.radius.magnetSpace){
-            onObject = 5
-        }
-        else{
-            onObject = 0;
-        }
-        resetInfo()
-        highlightInfo(onObject);
-    }, false)
-
-
-    function highlightInfo(onObject) {
-        switch(onObject){
-            case 0:
-                resetInfo();
-                break;
-            case 1:
-                infoSi.style.backgroundColor = 'rgb(220,220, 235)';
-                infoSi.style.display === "block";
-                break;
-            case 2:
-                infoEcal.style.backgroundColor = 'rgb(220,220, 235)';
-                infoEcal.style.display === "block";
-                break;
-            case 3:
-                infoHcal.style.backgroundColor = 'rgb(220,220, 235)';
-                infoHcal.style.display === "block";
-                break;
-            case 4:
-                infoMag.style.backgroundColor = 'rgb(220,220, 235)';
-                infoMag.style.display === "block";
-                break;
-            case 5:
-                infoMu.style.backgroundColor = 'rgb(220,220,235';
-                infoMu.style.display === "block";
-                break;
-        }
-    };
-    function resetInfo(){
-        infoSi.style.backgroundColor = 'rgb(248,248,255)';
-        infoEcal.style.backgroundColor = 'rgb(248,248,255)';
-        infoHcal.style.backgroundColor = 'rgb(248,248,255)';
-        infoMag.style.backgroundColor = 'rgb(248,248,255)';
-        infoMu.style.backgroundColor = 'rgb(248,248,255)';
-    }
-    
-})()
-
-function openRules() {
-    document.getElementById('subdet').style.width = '0px';
-    document.getElementById('rules').style.width = '50%';
-    //infoOpen = true;
-}
-
-function openInfo(){
-    document.getElementById('rules').style.width = '0px';
-    document.getElementById('subdet').style.width = '50%';
-    //infoOpen = true;
-}
-
-function closeNav(){
-    document.getElementById('rules').style.width = '0px';
-    document.getElementById('subdet').style.width = '0px';
-    //infoOpen = false;
-}
-
-var dropdown = document.getElementsByClassName("dropdown_btn");
-var i;
-for (i = 0; i < dropdown.length; i++) {
-    dropdown[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var dropdownContent = this.nextElementSibling;
-        if (dropdownContent.style.display === "block") {
-            dropdownContent.style.display = "none";
-        } 
-        else {
-            dropdownContent.style.display = "block";
-        }
-    });
-}
-
 
 function endGame(missed, extra) {
     
