@@ -28,6 +28,20 @@ body {
     font-size: 18px;
     padding: 15px;
 }
+
+#startPopup{
+    display: flex;
+    flex-flow: column nowrap;
+    z-index: 4;
+    background-color: #ffffff;
+    box-shadow: 0 0 5px 5px #bbbbbb;
+    align-items: center;
+    padding: 10px
+}
+
+.difficultyButtons.active{
+    background-color: rgb(150, 150, 150);
+}
     
 #main_app {    
     display: grid; 
@@ -430,7 +444,7 @@ hr.rounded{
     .subdetTab .tabText, .particlesTab .tabText{
         grid-area: main;
         margin: 0;
-        height: 90vh;
+        height: 60vmin;
         z-index: 12;
         padding: 10px 30px 10px 15px;
         text-shadow: 0 0 10px white;
@@ -578,13 +592,13 @@ input {
     #introPopup {
         background-color: #ffffff;
         box-shadow: 0 0 5px 5px #bbbbbb;
-        margin: 5% auto;
         padding: 40px;
-        width: 90%;
-        height: 90vh;
+        width: 90vmax;
+        height: 92vmin;
         z-index: 20;
         position: fixed;
-        left: 5%;        
+        top: 4vmin;
+        left: 5vmax;        
     }
     
     h1 {
@@ -620,7 +634,7 @@ input {
         display: inline;
         margin: 10px;
         overflow-y: scroll;
-        height: 36vh;
+        height: 40vmin;
     }
 
     .tabImage{
@@ -732,7 +746,7 @@ input {
 
     .tab .tabText{
         font-size: 150%;
-        height: 50vh;
+        height: 60vmin;
     }
 
     .tabImage{
@@ -822,7 +836,7 @@ input {
     }
 
     .subdetTab .tabText, .particlesTab .tabText{
-        height: 32vh;
+        height: 32vmin;
     }
 
     .info .closebtn{

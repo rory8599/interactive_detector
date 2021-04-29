@@ -1,5 +1,7 @@
 var game = {
 
+    difficulty: 0,
+
     level:
     {
         main: {
@@ -24,12 +26,22 @@ var game = {
 
 //Handle start
 document.getElementById('start').addEventListener("click", function(){
-    document.getElementById('start').style.visibility = 'hidden';
-    var coreCanvas = document.getElementById('detector_core')
-    //coreCanvas.hidden = false;
+    document.getElementById('startPopup').style.visibility = 'hidden';
     document.getElementById('detector_events').hidden = false;
-    coreCanvas.addEventListener("load", randomGenerate(1));
+    randomGenerate(1);
 }, false);
+
+//Handles the buttons setting the difficulty
+const diffButtons = document.querySelectorAll('.difficultyButtons');
+for(var i = 0; i<diffButtons.length; i++){
+    diffButtons[i].addEventListener("click",function(event){
+        game.difficulty = event.target.value
+        for(var j = 0; j<diffButtons.length; j++){
+            diffButtons[j].className = diffButtons[j].className.replace(" active", "");
+        }
+        diffButtons[event.target.value].className += " active";
+    },false);
+}
 
 
 //Buttons - handles the inputs
@@ -96,7 +108,7 @@ function handleRestart() {
         updateSubLevel();
     game.wrong.displayValue = 0;
         updateWrong();
-    randomGenerate(1);
+    document.getElementById('startPopup').style.visibility = 'visible';
 };
 
 function updateDisplay() {
@@ -214,6 +226,12 @@ function compareUserInput(userInput) {
     else{
         game.wrong.displayValue += numberWrong;
         updateWrong();
+        var holder = document.getElementById('detector-holder');
+        holder.style.setProperty('--animate-duration', '0.4s');
+        holder.classList.add('animate__animated', 'animate__shakeX');
+        holder.addEventListener('animationend', () => {
+            holder.classList.remove('animate__animated', 'animate__shakeX');
+        });
     }
 
     if(game.wrong.displayValue < 5){
