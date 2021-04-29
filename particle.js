@@ -40,25 +40,24 @@ function ParticleDraw(type, submitted)
             this.cpy2 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
             break;    
     }
-
     //calls the function below
-    this.draw(16, true, submitted)
+    this.draw(16, true)
 };
 
-ParticleDraw.prototype.draw = function(duration, init, submitted){
-    //also not sure what this is doing here
+ParticleDraw.prototype.draw = function(duration, init){
     init = typeof init !== 'undefined' ? init : false;
 
     var ctx = detector.events.ctx;
     var cx = detector.width/2;
     var cy = detector.height/2;
+    var width = 5 * (1 + (window.screen.availWidth > 992 ? 0 : 1));
 
     ctx.save();
 
     ctx.globalAlpha = this.alpha;
     ctx.strokeStyle = this.type.color;
     ctx.fillStyle = this.type.color;
-    ctx.lineWidth = 5;
+    ctx.lineWidth = width;
     
     ctx.translate(cx, cy);
     ctx.rotate(this.direction);
@@ -88,16 +87,6 @@ ParticleDraw.prototype.draw = function(duration, init, submitted){
         //this makes sure the very first track stays up longer than normal
         //a makeshift way to handle with the long load time after clicking start
     if(!init){
-        if(!submitted){
-            if(sum>2){
-                this.alpha -= (0.0075 - Math.min((0.000005*time), 0.0074))/16*duration;
-            }
-            else{
-                this.alpha -= 0.002/16*duration;
-            }
-        }
-        else{
-            this.alpha = 0;
-        }
+        this.alpha -= 0.0005/16*duration;
     }
 }

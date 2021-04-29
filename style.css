@@ -1,10 +1,8 @@
 body {
     width: 100vw;
-  	margin: 0 auto;
+  	margin: 0;
  	background-color: rgb(250, 255, 255);
-    font-size: 10px;
-    /* font-family: 'Montserrat', monospace; 
-    font-family: 'Roboto', sans-serif;*/
+    font-size: 11px;
     Font-Family: 'Lato', Sans-Serif;
     overflow: hidden;
 }
@@ -14,21 +12,45 @@ body {
     box-sizing: border-box;
 }
 
+#mobilePortraitContainer{
+    display: none;
+    position: fixed;
+    top: 0; bottom: 0; right: 0; left: 0;
+    padding-top: 50%;
+    z-index: 50;
+    background-color: white;
+}
+
+#mobilePortraitMessage{
+    text-align: center;
+    margin: auto;
+    color: gray;
+    font-size: 18px;
+    padding: 15px;
+}
+    
 #main_app {    
     display: grid; 
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(7, 1fr);
     grid-template-areas: 
-    "header header"
-    "main main"
-    "main main"
-    "main main"
-    "main main"
-    "footer footer"
-    "footer footer";
+    "main header"
+    "main header"
+    "main footer"
+    "main footer"
+    "main footer"
+    "main footer"
+    "main footer";
     grid-gap: 20px;
     grid-auto-flow: dense;
     height: 95vh;
+}
+
+.responsive-canvas{
+    height: 70vmin;
+    width: 70vmin;      
+    max-height: 250px;  
+    max-width: 250px;
 }
 
 /* The detector canvases */
@@ -37,6 +59,7 @@ body {
         display: flex;
         justify-content: center;   
         align-items: center;
+        padding: 0 0 20px 20px;
     }
 
     #detector_core{
@@ -49,43 +72,28 @@ body {
         z-index: 3;
     }
 
-    .responsive-canvas{
-        height: 75vw;
-        width: 75vw;
-        max-height: 500px;
-        max-width: 500px;
-    }
-
     #muon-tracker{
         display: none;
     }
 
 /* The Level and Wrong displays*/ 
-
     .app_initoutput{
         grid-area: header;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-areas: 
-        "level wrong";
-        background-color: rgb(250,250,250);
+        align-self: self-start;
+        display: flex;
+        flex-flow: row nowrap;
+        background-color: rgba(250,250,250);
         margin: 15px;
-        padding: 1%;
+        padding: 2%;
         text-align: center;
-        justify-items: center;
-        align-self: center;
-        font-size: 150%;
-        z-index: 4;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 110%;
+        z-index: 5;
     }
 
-    #app_level{
-        grid-area: level;
-        margin: 8% 5%;
-    }
-
-    #app_wrong{
-        grid-area: wrong;
-        margin: 8% 5%;
+    #app_level, #app_wrong{
+        margin: 8% 2%;
     }
 
     .app_levelwrong{
@@ -96,25 +104,26 @@ body {
     .app_input{
         grid-area: footer;
         display: flex;
-        flex-flow: row nowrap;
+        flex-flow: column nowrap;
         align-items: center;
         justify-content: space-around;
         z-index: 4;
         background-color: rgb(250,250,250);
         margin: 15px;
         padding: 5%;
+        align-self: self-end;
     }
 
     .userParticle{
-        flex: 1 1 auto;
+        flex: 1 1 30%;
+        margin: 0 10px 10px 10px;
     }
 
     #userParticle{
         width: 90%;
         height: 10vh;
         max-height: 12vh;
-        overflow: auto;
-        font-size: 125%;
+        font-size: 100%;
     }
 
     .endgame{
@@ -130,8 +139,8 @@ body {
 
     /* The Buttons */
         .inputbuttons{
-            width: 70%;
-            flex: 1 1 auto;
+            flex: 2 1 40%;
+            width: 95%;
             display: grid;
             grid-template-columns: repeat(6, 1fr);
             grid-template-rows: repeat(3, 40px);
@@ -140,7 +149,7 @@ body {
             "nhadron nhadron nhadron chadron chadron chadron"
             "clear clear submit submit restart restart";
         }
-
+        
         #photon{
             grid-area: photon;
         }
@@ -173,53 +182,29 @@ body {
                 cursor: pointer;
                 color: rgb(42, 42, 43);
                 padding: 3px;
+                margin: 3px;
                 text-transform: uppercase;
                 text-align: center;
                 transition-duration: 0.2s;
-                font-size: 2vmin;
+                font-size: 1.8vmax;
             }
 
             #clear, #submit, #restart{
-                background: rgba(210,210,230, 0.9)
+                background: rgba(214, 214, 223, 0.9)
             }
 
             #start{
-                width: 15vmin;
-                height: 8vmin;
-                border: 3px solid rgba(255, 255, 255, 0.8);
-                box-shadow: 0px 0px 15px 210px rgba(255, 255, 255, 0.7);
-            }
-
-            #start {
                 position: relative;
                 overflow: hidden;
-              }
+                width: 20vmin;
+                height: 8vmin;
+                border: 3px solid rgba(255, 255, 255, 0.8);
+            }
               
               #start a {
                 position: relative;
                 transition: all .45s ease-Out;
                 font-size: 150%;
-              }
-              
-              #circle {
-                width: 0%;
-                height: 0%;
-                opacity: 0;
-                line-height: 40px;
-                border-radius: 50% !important;
-                background: rgba(157, 157, 175, 0.74);
-                position: absolute;
-                transition: all .5s ease-Out;
-                top: 20px;
-                left: 70px;
-              }
-              
-              #start:hover #circle {
-                width: 200%;
-                height: 500%;
-                opacity: 1;
-                top: -70px;
-                left: -70px;
               }
               
               #start:hover a {
@@ -248,8 +233,15 @@ body {
     border-right: 2px solid rgba(200, 200, 200, 0.5);
     border-left: 2px solid rgba(200, 200, 200, 0.5);
     background-color: rgb(252, 252, 252);
-    overflow-x: hidden;
+    overflow: hidden;
     transition: 0.5s;
+    font-size: 150%;
+}
+
+.panelBody{
+    height: 100vh;
+    display: flex;
+    flex-flow: column nowrap;
 }
 
 .info a{
@@ -257,7 +249,7 @@ body {
     color: black;
     text-transform: uppercase;
     font-size: 85%;
-    text-shadow: 0 0 2px gray;
+    text-shadow: 0 0 1px gray;
 }
 
 .info a:hover{
@@ -265,30 +257,34 @@ body {
 }
 
 .info a:visited{
-    color: #1F5673;
+    color: #143a4e;
 }
 
-#rules {
+/* Left panel */
+#menu {
     left: 0;
     display: grid;
-    grid-template-columns: 1;
     grid-template-rows: 1fr 2fr;
     grid-template-areas: 
     "rules"
     "links";
 }
 
-#rules-body{
+#left-body{
+    height: 100vh;
+}
+
+#rulesBody{
     grid-area: rules;
     overflow-y: scroll;
 }
 
 #rules-text{
-    padding: 10px 25px;
+    padding: 10px;
     text-align: center;
 }
 
-#links-body{
+#linksBody{
     grid-area: links;
     overflow-y: scroll;
 }
@@ -303,6 +299,7 @@ body {
     font-size: 120%;
     Font-Family: 'Roboto', Sans-Serif;
     padding: 0px 15px;
+    margin-bottom: 0px;
 }
 
 .linksText{
@@ -332,77 +329,91 @@ hr.rounded{
 }
 
 .socialLogo{
-    width: 5vmin;
-    height: 5vmin;
+    width: 4vmax;
+    height: 4vmax;
     box-shadow: 0 0 10px 1px lightgray;
 }
-/*
-.fa {
-    padding-top: 3%;
-    font-size: 3vmin !important;
-    width: 5vmin;
-    height: 5vmin;
-    text-align: center;
-    text-decoration: none;
-    border-radius: 50% !important;
-    margin: 5px 2px;
-}
-  
-.fa:hover {
-    opacity: 0.7;
-}
 
-.fa-twitter {
-    background: #55ACEE;
-    color: white;
-}
-
-.fa-youtube {
-    background: #bb0000;
-    color: white;
-}
-
-.fa-instagram {
-    background: #125688;
-    color: white;
-}
-*/
 /* The right panel with subdetector/particle info */
 #moreInfo{
     right: 0;
 }
 
-#info_body{
-    height: 100vh;
+/* Tabs for the side panels - for mobile and tablet */
+.infoTabsContainer {
+    background-color: rgba(240,240,240,0.5);
+    display: none;
+    width: 49.5%;
+    max-width: 384px;
+    z-index: 14;
+    position: fixed;
+    top: 0px;
 }
 
-.infoTabsContainer{
+#info_body .infoTabsContainer{
+    right: 0px;
+}
+
+.infoTabsContainer button {
+    background-color: rgba(240,240,240,1);
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 2vmax;
+    height: 42px;
+    margin-bottom: 0px;
+}
+
+.infoTabsContainer button:hover {
+    background-color: #ddd;
+}
+
+.infoTabsContainer button.active {
+    background-color: rgba(252, 252, 252, 1);
+}
+
+.tabHeader{
+    font-size: 150%;
+}
+
+.infoTabContent {
     display: none;
+    padding: 6px 12px;
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 1s;
+    margin-top: 40px;
+}
+
+.panel-title{
+    display: none;        
+    background-color: rgb(240, 240, 240);
+    border-top: 2px solid rgba(200, 200, 200, 0.5);
+    border-bottom: 2px solid rgba(200, 200, 200, 0.5);
+    width: 100%;
+    justify-content: center;
+    position: sticky;
+    top: -1px;
     z-index: 14;
 }
 
-/* Content of the panels */
-    .panel-title{
-        background-color: rgb(240, 240, 240);
-        border-top: 2px solid rgba(200, 200, 200, 0.5);
-        border-bottom: 2px solid rgba(200, 200, 200, 0.5);
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        position: sticky;
-        top: -1px;
-        z-index: 13;
-    }
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
 
-    #particlesTitle{
-        top: 50%;
-    }
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Content of the tabs */
 
     .subdetTab, .particlesTab{
         display: none;
-        max-height: 40vh;
-        grid-template-columns: 1;
-        grid-template-rows: 1fr 4fr;
+        max-height: 80vh;
         grid-template-areas: 
         "title"
         "main";
@@ -419,7 +430,7 @@ hr.rounded{
     .subdetTab .tabText, .particlesTab .tabText{
         grid-area: main;
         margin: 0;
-        max-height: 100%;
+        height: 90vh;
         z-index: 12;
         padding: 10px 30px 10px 15px;
         text-shadow: 0 0 10px white;
@@ -432,8 +443,8 @@ hr.rounded{
         right: -70%;
         top: 44px;
         z-index: 10;
-        width: 140%;
-        max-height: 45vh;
+        width: 130%;
+        max-height: 90vh;
         object-fit: cover;
         object-position: 0% 100%;
     }
@@ -452,14 +463,8 @@ hr.rounded{
             width: 100%;
             background-color: rgb(252, 252, 252);
             z-index: 13;
-        }
-
-        #nextPrevBtnSubdet{
-            bottom: 50vh;
-        }
-
-        #nextPrevBtnParticle{
             bottom: 1px;
+            height: 50px;
         }
 
         #prevSubdet, #prevParticle{
@@ -521,7 +526,7 @@ hr.rounded{
         position: absolute;
         z-index: 15;
         top: 0;
-        right: 25px;
+        right: 5%;
         font-size: 36px;
         margin-left: 50px;
         color: gray;
@@ -535,14 +540,14 @@ hr.rounded{
 h4{
     margin: 10px 0px;
     font-size: 22px;
+    Font-Family: 'Roboto', Sans-Serif;
     text-align: center;
 }
 
 input {
     outline: none;
 	border: none;
-	margin: 0 0 20px 3px;
-	padding: 8px 5px 0px 0;
+	padding-left: 5px;
 	background: transparent;
     text-align: center;
     font-size: 100%;
@@ -559,7 +564,7 @@ input {
     z-index: 20;
 }
 
-#topnav_info, #topnav_rules{
+#topnav_info, #topnav_menu{
     color: black;
     text-decoration: none;
     font-size: 125%;
@@ -577,59 +582,55 @@ input {
         padding: 40px;
         width: 90%;
         height: 90vh;
-        z-index: 10;
+        z-index: 20;
         position: fixed;
         left: 5%;        
     }
     
     h1 {
         Font-Family: 'Roboto', Sans-Serif;
-
         text-align: center;  
+        font-size: 150%;
     }
     
     /* Hide all steps by default: */
     .tab {
         display: none;
-        grid-template-rows: fit-content;
+        grid-template-rows: 1fr 5fr;
+        grid-template-columns: 3fr 2fr;
         grid-template-areas: 
-        "header"
-        "main"
-        "image";
-        height: 60%;
+        "header header"
+        "main image";
+        height: 50vh;
     }
-
     #finalTab{
-        grid-template-areas: 
-        "header"
-        "main";
-        font-size: 120%;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 5fr;
     }
 
-    .tabHeader{
+    .tab .tabHeader{
         grid-area: header;
-        font-size: 150%;
+        font-size: 140%;
         padding: 0 20px;
-        margin-bottom: 10px;
+        margin: 0px;
     }
 
-    .tabText{
+    .tab .tabText{
         grid-area: main;
         display: inline;
         margin: 10px;
         overflow-y: scroll;
-        height: 100%;
+        height: 36vh;
     }
 
     .tabImage{
         grid-area: image;
-        align-self: center;
-        width: 70vw;
-        height: 35vh;
+        width: 40vmax;
+        height: 22vmax;
         object-fit: contain;
-        align-items: center;
+        align-self: baseline;
         justify-self: center;
-        margin: 0px;
+        margin: -15px 0 0 0;
     }
 
     #altStandardModel{
@@ -666,11 +667,12 @@ input {
         display: flex;
         justify-content: center;
         align-items: center;
+        margin-bottom: 0px;
     }
     
     .step {
-        height: 15px;
-        width: 30px;
+        height: 8px;
+        width: 16px;
         background-color: #bbbbbb;
         border: none;  
         display: inline-block;
@@ -679,7 +681,7 @@ input {
     
     .step.active {
         opacity: 1;
-        height: 30px;
+        height: 16px;
     }
     
     /* Mark the steps that are finished and valid: */
@@ -703,239 +705,124 @@ input {
 
 /*Responsive*/
 /*Phone*/
-@media screen and (max-width: 767px) {
-    body{
-        font-size: 15px;
-    }
-
-    .col-sm-6{
-        width: 100%;
-    }
-
-    #info_body{
-        display: grid;
-        grid-template-columns: 1;
-        grid-template-rows: 2;
-        grid-template-areas: 
-        "subdet"
-        "particle"; 
-    }
-
-    #subdetBody{
-        grid-area: subdet;
-        height: 50vh;
-    }
-
-    #particleBody{
-        grid-area: particle;
-        height: 50vh;
-    }
-}
-
-/*Phone and tablet when landscape*/
-@media screen and (orientation:landscape) and (max-width: 991px){
-    .tab {
-        grid-template-rows: 1fr 5fr;
-        grid-template-columns: 3fr 2fr;
-        grid-template-areas: 
-        "header header"
-        "main image";
-        height: 50vh;
-    }
-    #finalTab{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 5fr;
-    }
-
-    .tabImage{
-        width: 40vw;
-        justify-self: center;
-        align-self: baseline;
-        margin-bottom: 10px;
-    }
-    
-    #main_app {    
-        display: grid; 
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: repeat(7, 1fr);
-        grid-template-areas: 
-        "main header"
-        "main header"
-        "main footer"
-        "main footer"
-        "main footer"
-        "main footer"
-        "main footer";
-        grid-gap: 20px;
-        grid-auto-flow: dense;
-        height: 95vh;
-    }
-
-    .app_input{
-        flex-flow: column nowrap;
-    }
-
-    .responsive-canvas{
-        height: 50vw;
-        width: 50vw;      
-        max-height: 400px;  
-        max-width: 400px;
-    }
-
-    .infoTabsContainer {
-        display: inline;
-        overflow: hidden;
-    }
-    
-    .infoTabsContainer button {
-        background-color: rgba(240,240,240,1);
-        float: left;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        padding: 14px 16px;
-        transition: 0.3s;
-        font-size: 17px;
-        height: 44px;
-    }
-    
-    .infoTabsContainer button:hover {
-        background-color: #ddd;
-    }
-    
-    .infoTabsContainer button.active {
-        background-color: rgba(252, 252, 252, 0.4);
-    }
-
-    .moreInfoForm{
-        margin-top: 40px;
-    }
-
-    .nextPrevBtnInfo{
-        height: 50px;
-    }
-
-    .tabHeader{
-        font-size: 225%;
-    }
-
-    .info .tabText{
-        font-size: 150%;
-        height: 70vh;
-    }
-    
-    .infoTabContent {
-        display: none;
-        padding: 6px 12px;
-        -webkit-animation: fadeEffect 1s;
-        animation: fadeEffect 1s;
-    }
-    
-    @-webkit-keyframes fadeEffect {
-        from {opacity: 0;}
-        to {opacity: 1;}
-    }
-    
-    @keyframes fadeEffect {
-        from {opacity: 0;}
-        to {opacity: 1;}
-    }
-
-    #nextPrevBtnSubdet{
-        bottom: 1px;
-    }
-    
-    .infoTabContent .panel-title{
-        display: none;
-    }
-
-    .socialLogo{
-        width: 8vmin;
-        height: 8vmin;
+@media screen and (orientation:portrait) and (max-width: 800px) {
+    #mobilePortraitContainer{
+        display: block;
     }
 }
 
 /*Tablet*/
 @media screen and (min-width: 768px) {
     body{
-        font-size: 14px;
+        font-size: 13px;
     }
-
-    #detector-holder {
-        margin-left: -15px;
-        margin-right: -15px;
-    }
-
+    
     .info{
         max-width: 384px;
     }
 
-    #subdetBody, #particleBody{
-        height: 50vh;
+    .app_initoutput{
+        align-self: self-end;
+        font-size: 125%;
+    }
+
+    .app_input{
+        align-self: self-start;
     }
 
     .tab .tabText{
         font-size: 150%;
+        height: 50vh;
+    }
+
+    .tabImage{
+        height: 30vmax;
+    }
+
+    .tabHeader{
+        margin: 5px;
+    }
+
+    .responsive-canvas{
+        max-height: 350px;
+        max-width: 350px;
     }
 }
 
 /*Small desktop*/
 @media screen and (min-width: 992px) {
-    .tab {
-        grid-template-rows: 1fr 5fr;
-        grid-template-columns: 3fr 2fr;
-        grid-template-areas: 
-        "header header"
-        "main image";
-        height: 50vh;
-    }
-
-    #finalTab{
-        grid-template-columns: 1fr;
-        grid-template-rows: 1fr 5fr;
-        grid-template-areas: 
-        "header"
-        "main";
-        font-size: 130%;
-    }
-
-    .tabImage{
-        width: 40vw;
-        justify-self: center;
-        align-self: baseline;
-        margin-bottom: 10px;
-    }
 
     body{
         font-size: 16px;
     }
 
+    .container_{
+        display: flex;  
+        justify-content: space-around;
+    }  
+
     .topnav{
         display: none;
     }
 
-    #main_app{
-        height: 100vh;
-    }
-    
-    .responsive-canvas{    
-        max-height: 450px;  
-        max-width: 450px;
+    .tabImage{
+        height: 35vmax;
     }
 
-    .container_{
-        display: flex;  
-        justify-content: space-around;
-    }    
+    #main_app{
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .app_initoutput{
+        align-self: stretch;
+        height: 15vh;
+        background-color: rgba(250,250,250,0.2);
+    }
+
+    .app_input{
+        flex-flow: row nowrap;
+        align-self: center;
+    }
 
     #app{
         width: 50%;
     }
 
-    #rules, #moreInfo{
+    .info{
+        font-size: 100%;
+    }
+
+    .infoTabContent{
+        display: block;
+        flex: 1 1 auto;
+        margin-top: 0px;
+        padding: 0px;
+    }
+
+    #moreInfo .infoTabContent{
+        height: 50vh;
+    }
+
+    #nextPrevBtnSubdet{
+        bottom: 49vh;
+    }
+
+    #menu, #moreInfo{
         flex: 1;
         z-index: 9;
-        width: 25%;   
+        width: 25%;  
+    }
+
+    .panel-title{
+        display: flex;
+    }
+
+    .subdetTab .tabText, .particlesTab .tabText{
+        height: 32vh;
     }
 
     .info .closebtn{
@@ -952,11 +839,7 @@ input {
     body{
         font-size: 18px;
     }
-    h4{
-        Font-Family: 'Roboto', Sans-Serif;
 
-        font-size: 24px;
-    }
     .responsive-canvas{    
         max-height: 500px;  
         max-width: 500px;
