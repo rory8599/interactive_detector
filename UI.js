@@ -19,7 +19,7 @@ function showTab(n, m, l) {
         document.getElementById("prevBtn").style.display = "inline";
     }
     if (n == (x.length - 1)) {
-        document.getElementById("nextBtn").innerHTML = "Play!";
+        document.getElementById("nextBtn").innerHTML = "Close";
     } else {
         document.getElementById("nextBtn").innerHTML = "Next";
     }
@@ -106,6 +106,12 @@ function closePopup(){
     showTab(0,0,0);
 }
 
+function openPopup(){
+  document.getElementById("introPopup").style.display = "block";
+  introDone = false;
+  showTab(0,currentSubdetTab,currentParticleTab);
+}
+
 //tabs for when mobile is in landscape
 function openInfoTab(evt, tabName) {
     // Declare all variables
@@ -128,18 +134,25 @@ function openInfoTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-function openRules() {
+function openMenu() {
     document.getElementById('moreInfo').style.width = '0px';
-    document.getElementById('rules').style.width = '50%';
+    document.getElementById('infoTabsContainerRight').style.display = "none";
+    document.getElementById('menu').style.width = '50%';
+    document.getElementById('infoTabsContainerLeft').style.display = "inline";
+    openInfoTab(event,'rulesBody');
 }
 
 function openInfo(){
-    document.getElementById('rules').style.width = '0px';
+    document.getElementById('menu').style.width = '0px';
+    document.getElementById('infoTabsContainerLeft').style.display = "none";
     document.getElementById('moreInfo').style.width = '50%';
+    document.getElementById('infoTabsContainerRight').style.display = "inline";
     openInfoTab(event, 'subdetBody');
 }
 
 function closeNav(){
-    document.getElementById('rules').style.width = '0px';
+    document.getElementById('menu').style.width = '0px';
     document.getElementById('moreInfo').style.width = '0px';
+    document.getElementById('infoTabsContainerLeft').style.display = "none";
+    document.getElementById('infoTabsContainerRight').style.display = "none";
 }

@@ -35,16 +35,16 @@
 
 <body translate= "no">
     <div class = "container_">
+        <div id = "mobilePortraitContainer">
+            <div id = "mobilePortraitMessage">
+                This game works best in landscape on mobile.
+            </div>
+        </div>
+
         <div id = "introPopup">
             <form id="regForm">
             <a href="javascript:void(0)" class="closebtn" id = "closePopup" onclick="closePopup()">&times;</a>
-            <div class = "introTabs" style="text-align:center;margin-bottom: 30px;">
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
-                <span class="step"></span>
+            <div class = "introTabs" style="text-align:center;">
                 <span class="step"></span>
                 <span class="step"></span>
                 <span class="step"></span>
@@ -61,79 +61,31 @@
                     Press next to learn more…
                 </p>
                 <img src = "assets/controlRoom.jpg" class = "tabImage" id ="controlRoom">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Particle Physics</h3>
-                <p class="tabText">
-                    Particle physics is based on something called the Standard Model; it describes all the particles we know about. 
-                    Physicists around the world are testing the limits of this model as well as searching for anything that might be missing from it with all sorts of experiments.
-                </p><img src = "assets/StandardModel.jpg" class = "tabImage" id ="StandardModel">
-            </div>           
+            </div>       
             <div class="tab">
                 <h3 class = "tabHeader">CERN</h3>
                 <p class="tabText">
-                    Many of these experiments are based at CERN, such as those at the Large Hadron Collider - the world's largest and most powerful particle accelerator. 
+                    The Large Hadron Collider at CERN is the world's largest and most powerful particle accelerator. Experiments here are designed to test the limits of particle physics, to try and better understand the building blocks of the universe.
                     <br>
-                    Here, particles are accelerated to almost the speed of the light, and then they’re collided at one of the detectors creating a huge burst of energy and a vast number of particles - some of which have never been seen before! 
+                    In the LHC, particles are accelerated to almost the speed of the light, and then they’re collided at one of the detectors creating a huge burst of energy and a vast number of particles - some of which have never been seen before!  
                     <br><br>
-                    Many of the particles created are  very unstable and will decay within a fraction of a second into one of 5 types that scientists can detect. 
+                    Many of the particles created are very unstable and will decay within a fraction of a second often into one of 5 types that scientists can detect.
                 </p><img src = "assets/CERNParticlecollision.png" class = "tabImage" id ="collisionImage">
             </div>
             <div class="tab">
                 <h3 class = "tabHeader">The Particles</h3>
                 <p class="tabText">
-                    The CERN experiments can detect and track 5 types of particles. These are: photons, electrons, muons, neutral hadrons, charged hadrons. 
-                    The important thing is they all have different properties (such as mass, electric charge etc.) which means they behave differently in our detector - this is how physicists, <span style="font-style: italic; display: inline;">and you</span> will tell them apart. 
-                    <br>
-                    In the next steps, we'll quickly see each section of the detector and the particles it can detect. If you want to find out more about how they work and were made, check out the Info panel which has links where you can find out more!
-                </p><img src = "assets/StandardModelAlt.png" class = "tabImage" id ="altStandardModel">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Subdetector: Silicon Tracker</h3>
-                <p class="tabText">
-                    The Silicon tracker is the first part of the detector that all our particles travel through – it tells us where a particle has been which can be used to calculate the momentum of some particles - this is very handy for our physicists, but we don't need to worry about that for now.
-            </p><img src = "assets/Subdet/SiHighlighted.png" class = "tabImage" id ="siTabImage">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Subdetector: ECAL</h3>
-                <p class="tabText">
-                    The Electromagnetic Calorimeter is used to detect electrons and photons. When they pass through this section, they are stopped and produce a flash of light and we can measure the energy. 
+                    The CERN experiments can detect and track 5 types of particles. These are: photons, electrons, muons, neutral hadrons, charged hadrons. These all have different properties (such as mass, electric charge etc.) which means they behave differently in our detector - this is how physicists (<span style="font-style: italic; display: inline;">and you</span>) can tell them apart. 
                     <br><br>
-                    If a track stops here, it is an either an electron or photon. Curved tracks are from electrically charged particles - electrons have an electric charge and photons are neutral.
-            </p><img src = "assets/Subdet/ECALwTracks.png" class = "tabImage" id ="ecalTabImage">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Subdetector: HCAL</h3>
-                <p class="tabText">
-                    The Hadron Calorimeter is used to detect the neutral hadrons and charged hadrons. A hadron is just any particle made up of quarks (see the Standard Model), these include protons and neutrons which make up all the atoms in our body and pretty much everything around us. 
-                    <br><br>
-                    When they go through this section they’re stopped, any track that stops here will be a hadron, and we can tell if it's charged or neutral based on whether it's a curved or straight path.
-            </p><img src = "assets/Subdet/HCALwTracks.png" class = "tabImage" id ="hcalTabImage">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Magnet</h3>
-                <p class="tabText">
-                    The magnet is extremely important for a particle detector; we can use it to alter the movemement of charged particles. 
-                    Charged particles (such as the electron, muon, and charged hadron) will travel in a curved path because of the magnet, neutral particles (such as the photon and neutral hadron) will continue in a straight line unaffected. This is key to telling particles apart if they stop in the same part of the detector.
-                </p><img src = "assets/Subdet/MagnetHighlighted.png" class = "tabImage" id ="magnetTabImage">
-            </div>
-            <div class="tab">
-                <h3 class = "tabHeader">Subdetector: Muon tracker</h3>
-                <p class="tabText">
-                    Finally, there’s the muon tracker. The 4 other types of particle have all been stopped, but the muon plows through, the tracker at the outer edge should only pick up muons. 
-                    <br><br>
-                    The muon creates a distinctive S-shaped track because once it passes through to the other side of the magnet the magnetic field points in the opposite direction – which makes it curve the other way.
-                </p>
-                <img src = "assets/Subdet/MuonwTracks.png" class = "tabImage" id ="muonTabImage">
+                    Look through the information in the side panels to learn more about what these particles will look like and how the different parts of the detector work.
+                </p><img src = "assets/cmsParticleAnim.gif" class = "tabImage" id ="cmsParticleAnim">
             </div>
             <div class="tab" id="finalTab">
                 <h3 class = "tabHeader">How to play</h3>
                 <p class="tabText">
-                    That was a lot to take in! Don’t worry if you can’t remember it all, the Info bar on the right should help you. 
-                    <br><br>
-                    Press play to see if you can identify the particles tracked – use the buttons and press SUBMIT to see if you’ve got it it right. Keep track of your score with the Level indicator at the top. 
+                    Check the info tabs on either side for info on what the particles should look like. Once you press start a random particle track will appear – use the buttons to enter the particle you think it is and press SUBMIT to see if you’ve got it right! 
                     <br>
-                    You have 5 lives – see how many particles you can correctly identify!
+                    If you choose right you’ll go up a level and gradually more particles will appear. You can get 5 wrong before the game ends – see how many particles you can correctly identify!
                 </p>
             </div>
             <div class = "nextPrevBtn" style="float:right;">
@@ -144,52 +96,61 @@
         </div>
 
         <div class="topnav" id="myTopnav">
-            <a href="#rules" id="topnav_rules" onclick="openRules()">&#9776;</a>
+            <a href="#menu" id="topnav_menu" onclick="openMenu()">&#9776;</a>
             <a href="#moreInfo" id="topnav_info" onclick="openInfo()">INFO</a>
         </div>
         
         <!-- Left-side panel with rules and general info -->
-        <div class = "info" id = "rules">
+        <div class = "info" id = "menu">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class = "panel-body" id = "rules-body">   
-                <div class = "panel-title"><h4>Game Rules</h4></div>
-                <p id ="rules-text">
-                    When a particle track appears, use the buttons to try and identify it as one of the 5 types of particles we can detect. 
-                    <br><br>
-                    The higher the level, the more particles will appear. 
-                    <br><br>
-                    How many can you identify!
-                </p>             
-            </div>
-            <div class = "panel-body" id = "links-body">
-                <div class = "panel-title"><h4>Where to next...</h4></div>
-                <div id="linksMain">
-                    <h3 class = "linksHeader" id = "cernLinksHeader">Learn more about CERN</h3>
-                    <p class="linksText">
-                        Take a look at the pages below to find out more about CERN and its groundbreaking discoveries! 
-                    </p>
-                    <ul id="cernLinks">
-                        <li>
-                            <i class="arrow right"></i><a href="https://home.cern/science/accelerators/large-hadron-collider" target="_blank">Large Hadron Collider</a>
-                        </li>
-                        <li>
-                            <i class="arrow right"></i><a href="https://home.cern/science/physics/higgs-boson" target="_blank">Discovery of the Higgs Boson</a>
-                        </li>
-                        <li>
-                            <i class="arrow right"></i><a href="https://home.cern/science/computing/birth-web" target="_blank">Invention of World Wide Web</a> 
-                        </li>
-                    </ul>
-                    <hr class="rounded">
-                    <h3 class="linksHeader">Follow us:</h3>
-                    <p class="linksText">
-                        Follow STFC and the Particle Physics Department on social media to stay updated on STFC research and opportunities!
-                    </p>
-                    <div id="socialLinks">
-                        <a href="https://twitter.com/PPD_STFC" target="_blank"><img src="./assets/twitter.png" class="socialLogo"></a>
-                        <a href="https://www.instagram.com/bigscience_stfc/?hl=en" target="_blank"><img src="./assets/instagram.png" class="socialLogo"></a>
-                        <a href="https://www.youtube.com/user/SciTechUK" target="_blank"><img src="./assets/youtube.png" class="socialLogo"></a>
-                    </div> 
-                </div>                   
+            <div class = "panelBody" id = "left-body"> 
+                <div class="infoTabsContainer" id="infoTabsContainerLeft">
+                    <button class="tablinks" onclick="openInfoTab(event, 'rulesBody')">Rules</button>
+                    <button class="tablinks" onclick="openInfoTab(event, 'linksBody')">Where to next...</button>
+                </div>  
+                <div class = "infoTabContent" id = "rulesBody">
+                    <div class = "panel-title">
+                        <h4>Game Rules</h4>
+                    </div>
+                    <p id ="rules-text">
+                        When a particle track appears, use the buttons to try and identify it as one of the 5 types of particles we can detect. The higher the level, the more particles will appear. 
+                        <br><br>
+                        How many can you identify!
+                        <br><br>
+                        <button id="reopenIntro" onclick="openPopup()">See the introduction again?</button>
+                    </p>   
+                </div>
+                          
+                <div class = "infoTabContent" id = "linksBody">
+                    <div class = "panel-title"><h4>Where to next...</h4></div>
+                    <div id="linksMain">
+                        <h3 class = "linksHeader" id = "cernLinksHeader">Learn more about CERN</h3>
+                        <p class="linksText">
+                            Take a look at the pages below to find out more about CERN and its groundbreaking discoveries! 
+                        </p>
+                        <ul id="cernLinks">
+                            <li>
+                                <i class="arrow right"></i><a href="https://home.cern/science/accelerators/large-hadron-collider" target="_blank">Large Hadron Collider</a>
+                            </li>
+                            <li>
+                                <i class="arrow right"></i><a href="https://home.cern/science/physics/higgs-boson" target="_blank">Discovery of the Higgs Boson</a>
+                            </li>
+                            <li>
+                                <i class="arrow right"></i><a href="https://home.cern/science/computing/birth-web" target="_blank">Invention of World Wide Web</a> 
+                            </li>
+                        </ul>
+                        <hr class="rounded">
+                        <h3 class="linksHeader">Follow us:</h3>
+                        <p class="linksText">
+                            Follow STFC and the Particle Physics Department on social media to stay updated on STFC research and opportunities!
+                        </p>
+                        <div id="socialLinks">
+                            <a href="https://twitter.com/PPD_STFC" target="_blank"><img src="./assets/twitter.png" class="socialLogo"></a>
+                            <a href="https://www.instagram.com/bigscience_stfc/?hl=en" target="_blank"><img src="./assets/instagram.png" class="socialLogo"></a>
+                            <a href="https://www.youtube.com/user/SciTechUK" target="_blank"><img src="./assets/youtube.png" class="socialLogo"></a>
+                        </div> 
+                    </div>                   
+                </div>
             </div>
         </div>
                         
@@ -209,7 +170,7 @@
                         <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
                     </canvas>
                     <canvas class = "responsive-canvas" id = "detector_events" width="1200" height="1200" hidden></canvas>  
-                    <button id = "start" value = "start"><div id="circle"></div><a>Start</a></button>
+                    <button id = "start" value = "start"><a>Start</a></button>
                 </div>  
                 <div class ="app_input">
                     <div class = "userParticle">
@@ -242,112 +203,108 @@
         <!-- Right-side panel with subdetector info -->
         <div class = "info" id = "moreInfo">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-            <div class="panel-body" id = "info_body">
-                <div class="infoTabsContainer">
+            <div class="panelBody" id = "info_body">
+                <div class="infoTabsContainer" id="infoTabsContainerRight">
                     <button class="tablinks" onclick="openInfoTab(event, 'subdetBody')">Subdetectors</button>
                     <button class="tablinks" onclick="openInfoTab(event, 'particleBody')">Particles</button>
                 </div>
                 <div class = "infoTabContent" id = "subdetBody">
                     <div class = "panel-title"><h4>Subdetectors</h4></div>
-                    <form class = "moreInfoForm" id="subdetForm">
-                        <div class="subdetTab">
-                            <h3 class = "tabHeader">Silicon tracker</h3>
-                            <img class = "subdetImage" src = "./assets/Subdet/SiHL.png">
-                            <p class="tabText">
-                                Silicon pixels make a tiny electrical signal when a particle passes through it, we can detect this and see where particles have been. This can also let us know the momentum of some particles, which is pretty handy for calculations.
-                                <br><br>
-                                More on the silicon tracker <a href="https://cms.cern/detector/identifying-tracks" target="_blank">here</a>!
-                            </p>
+                    <div class="subdetTab">
+                        <h3 class = "tabHeader">Silicon tracker</h3>
+                        <img class = "subdetImage" src = "./assets/Subdet/SiHL.png">
+                        <p class="tabText">
+                            Silicon pixels make a tiny electrical signal when a charged particle passes through it, we can detect this and see where these particles have been. This can also let us know their momentum, which is pretty handy for calculations.
+                            <br><br>
+                            More on the silicon tracker <a href="https://cms.cern/detector/identifying-tracks" target="_blank">here</a>!
+                        </p>
+                    </div>
+                    <div class="subdetTab">
+                        <h3 class = "tabHeader">ECAL</h3>
+                        <img class = "subdetImage" src = "./assets/Subdet/ECALHL.png">
+                        <p class="tabText">
+                            This is the electromagnetic calorimeter; it is an example of what's known as a scintillator. This means when particles like electrons or photons go through it, it produces a flash of light. We can measure this light and from that calculate the energy of the photons and electrons.
+                            <br><br>
+                            More on the ECAL <a href="https://cms.cern/detector/measuring-energy/energy-electrons-and-photons-ecal" target="_blank">here</a>!
+                        </p>
+                    </div>           
+                    <div class="subdetTab">
+                        <h3 class = "tabHeader">HCAL</h3>
+                        <img class = "subdetImage" src = "./assets/Subdet/HCALHL.png">
+                        <p class="tabText">
+                            The hadron calorimeter measures the energy of hadrons – these are particles that are made of quarks (like protons or neutrons). The hadrons will go into a thick absorber layer so the hadrons break down into particles that can be detected by a scintillator layer, just like in the electromagnetic calorimeter. 
+                            <br><br>
+                            More on the HCAL <a href="https://cms.cern/detector/measuring-energy/energy-hadrons-hcal" target="_blank">here</a>!
+                        </p>
+                    </div>
+                    <div class="subdetTab">
+                        <h3 class = "tabHeader">Magnet</h3>
+                        <img class = "subdetImage" src = "./assets/Subdet/MagnetHL.png">
+                        <p class="tabText">
+                            Magnets are incredibly important in particle detectors; they can control the path of charged particles. This is a very large solenoid magnet which makes a magnetic field that is 100,000 times stronger than the Earth’s!
+                            <br><br>
+                            More on the magnet <a href="https://cms.cern/detector/detecting-muons" target="_blank">here</a>!
+                        </p>
+                    </div>
+                    <div class="subdetTab">
+                        <h3 class = "tabHeader">Muon tracker</h3>
+                        <img class = "subdetImage" id = "muonHL" src = "./assets/Subdet/MuonHL.png">
+                        <p class="tabText">
+                            Muons are like electrons but a lot heavier, so they aren’t stopped by the calorimeters. The final part of the detector is designed just to detect muons. The muon trackers show us where the muons have been, then based on how curved the path is we can find the momentum. 
+                            <br><br>
+                            More on the muon tracker <a href="https://cms.cern/detector/identifying-tracks" target="_blank">here</a>!
+                        </p>
+                    </div>
+                    <div class = "nextPrevBtnInfo" id = "nextPrevBtnSubdet">
+                        <button class = "tabButton" type="button" id="prevSubdet" onclick="nextPrev(0, -1, 0)"><i class="arrow left"></i></button>
+                        <div class = "tabIndicator" style="text-align:center;">
+                            <span class = "subdetStep"></span>
+                            <span class = "subdetStep"></span>
+                            <span class = "subdetStep"></span>
+                            <span class = "subdetStep"></span>
+                            <span class = "subdetStep"></span>
                         </div>
-                        <div class="subdetTab">
-                            <h3 class = "tabHeader">ECAL</h3>
-                            <img class = "subdetImage" src = "./assets/Subdet/ECALHL.png">
-                            <p class="tabText">
-                                This is the electromagnetic calorimeter; it is also known as a scintillator. This means when particles like electrons or photons go through it, they create a flash of light. We can measure this light and from that calculate the energy of the photons and electrons.
-                                <br><br>
-                                More on the ECAL <a href="https://cms.cern/detector/measuring-energy/energy-electrons-and-photons-ecal" target="_blank">here</a>!
-                            </p>
-                        </div>           
-                        <div class="subdetTab">
-                            <h3 class = "tabHeader">HCAL</h3>
-                            <img class = "subdetImage" src = "./assets/Subdet/HCALHL.png">
-                            <p class="tabText">
-                                The hadron calorimeter measures the energy of hadrons – these are particles that are made of quarks (like protons or neutrons). The hadrons will go into a thick absorber layer so the hadrons break down into particles that can be detected by a scintillator layer, just like in the electromagnetic calorimeter. 
-                                <br><br>
-                                More on the HCAL <a href="https://cms.cern/detector/measuring-energy/energy-hadrons-hcal" target="_blank">here</a>!
-                            </p>
-                        </div>
-                        <div class="subdetTab">
-                            <h3 class = "tabHeader">Magnet</h3>
-                            <img class = "subdetImage" src = "./assets/Subdet/MagnetHL.png">
-                            <p class="tabText">
-                                Magnets are incredibly important in particle detectors; they can control the path of charged particles. This is a very large solenoid magnet which makes a magnetic field that is 100,000 times stronger than the Earth’s!
-                                <br><br>
-                                More on the magnet <a href="https://cms.cern/detector/detecting-muons" target="_blank">here</a>!
-                            </p>
-                        </div>
-                        <div class="subdetTab">
-                            <h3 class = "tabHeader">Muon tracker</h3>
-                            <img class = "subdetImage" id = "muonHL" src = "./assets/Subdet/MuonHL.png">
-                            <p class="tabText">
-                                Muons are like electrons but a lot heavier, so they aren’t stopped by the calorimeters. The final part of the detector is designed just to detect muons. The muon trackers show us where the muons have been, then based on how curved the path is we can find the momentum. 
-                                <br><br>
-                                More on the muon tracker <a href="https://cms.cern/detector/identifying-tracks" target="_blank">here</a>!
-                            </p>
-                        </div>
-                        <div class = "nextPrevBtnInfo" id = "nextPrevBtnSubdet">
-                            <button class = "tabButton" type="button" id="prevSubdet" onclick="nextPrev(0, -1, 0)"><i class="arrow left"></i></button>
-                            <div class = "tabIndicator" style="text-align:center;">
-                                <span class = "subdetStep"></span>
-                                <span class = "subdetStep"></span>
-                                <span class = "subdetStep"></span>
-                                <span class = "subdetStep"></span>
-                                <span class = "subdetStep"></span>
-                            </div>
-                            <button class = "tabButton" type="button" id="nextSubdet" onclick="nextPrev(0, 1, 0)"><i class="arrow right"></i></button>
-                        </div>
-                    </form>
+                        <button class = "tabButton" type="button" id="nextSubdet" onclick="nextPrev(0, 1, 0)"><i class="arrow right"></i></button>
+                    </div>
                 </div>                    
                 <div class = "infoTabContent" id = "particleBody">
                     <div class = "panel-title" id = "particlesTitle"><h4>Particles</h4></div>                      
-                    <form class = "moreInfoForm" id="particlesForm">
-                        <div class="particlesTab">
-                            <h3 class = "tabHeader">Photon</h3>
-                            <p class="tabText">
-                                Photons are particles of light. They have no mass, no electric charge and they’re elementary which means they’re not made up of smaller particles. Photons interact with matter a lot, its interactions with the eye allow you to read what’s on the screen right now! When they pass through a detector at CERN they’re detected at the electromagnetic calorimeter.                            </p>
+                    <div class="particlesTab">
+                        <h3 class = "tabHeader">Photon</h3>
+                        <p class="tabText">
+                            Photons are particles of light. They have no mass, no electric charge and they’re elementary which means they’re not made up of smaller particles. Photons interact with matter a lot, its interactions with the eye allow you to read what’s on the screen right now! When they pass through a detector at CERN they’re detected at the electromagnetic calorimeter.                            </p>
+                    </div>
+                    <div class="particlesTab">
+                        <h3 class = "tabHeader">Electron</h3>
+                        <p class="tabText">
+                            Electrons are small, stable, electrically charged, elementary particles. They are the foundation of electronics and are also produced in particle collisions at CERN, where the electromagnetic calorimeter can detect them.                             </p>
+                    </div>           
+                    <div class="particlesTab">
+                        <h3 class = "tabHeader">Muon</h3>
+                        <p class="tabText">
+                            Muons are like electrons except they’re much bigger and much less stable. The detector can’t stop the muons, so they travel right through and it’s only at the outer edge they can be detected in the muon tracker.                            </p>
+                    </div>
+                    <div class="particlesTab">
+                        <h3 class = "tabHeader">Neutral Hadron</h3>
+                        <p class="tabText">
+                            Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Neutrons are an example of a neutral hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
+                    </div>
+                    <div class="particlesTab">
+                        <h3 class = "tabHeader">Charged Hadron</h3>
+                        <p class="tabText">
+                            Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Protons are an example of a charged hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
+                    </div>
+                    <div class = "nextPrevBtnInfo" id = "nextPrevBtnParticle">
+                        <button class = "tabButton" type="button" id="prevParticle" onclick="nextPrev(0, 0, -1)"><i class="arrow left"></i></button>
+                        <div class = "tabIndicator" style="text-align:center;">
+                            <span class = "particleStep"></span>
+                            <span class = "particleStep"></span>
+                            <span class = "particleStep"></span>
+                            <span class = "particleStep"></span>
+                            <span class = "particleStep"></span>
                         </div>
-                        <div class="particlesTab">
-                            <h3 class = "tabHeader">Electron</h3>
-                            <p class="tabText">
-                                Electrons are small, stable, electrically charged, elementary particles. They are the foundation of electronics and are also produced in particle collisions at CERN, where the electromagnetic calorimeter can detect them.                             </p>
-                        </div>           
-                        <div class="particlesTab">
-                            <h3 class = "tabHeader">Muon</h3>
-                            <p class="tabText">
-                                Muons are like electrons except they’re much bigger and much less stable. The detector can’t stop the muons, so they travel right through and it’s only at the outer edge they can be detected in the muon tracker.                            </p>
-                        </div>
-                        <div class="particlesTab">
-                            <h3 class = "tabHeader">Neutral Hadron</h3>
-                            <p class="tabText">
-                                Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Neutrons are an example of a neutral hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
-                        </div>
-                        <div class="particlesTab">
-                            <h3 class = "tabHeader">Charged Hadron</h3>
-                            <p class="tabText">
-                                Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Protons are an example of a charged hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
-                        </div>
-                        <div class = "nextPrevBtnInfo" id = "nextPrevBtnParticle">
-                            <button class = "tabButton" type="button" id="prevParticle" onclick="nextPrev(0, 0, -1)"><i class="arrow left"></i></button>
-                            <div class = "tabIndicator" style="text-align:center;">
-                                <span class = "particleStep"></span>
-                                <span class = "particleStep"></span>
-                                <span class = "particleStep"></span>
-                                <span class = "particleStep"></span>
-                                <span class = "particleStep"></span>
-                            </div>
-                            <button class = "tabButton" type="button" id="nextParticle" onclick="nextPrev(0, 0, 1)"><i class="arrow right"></i></button>
-                        </div>
-                    </form>
+                        <button class = "tabButton" type="button" id="nextParticle" onclick="nextPrev(0, 0, 1)"><i class="arrow right"></i></button>
+                    </div>
                 </div>
             </div>
         </div>
