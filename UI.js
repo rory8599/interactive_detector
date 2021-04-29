@@ -1,4 +1,3 @@
-
 //Introduction Tabs (n[input], x[tabs class], a[current tab]) Subdet(m, y, b) Particles (l, z, c)
 var currentIntroTab = 0; // Current tab is set to be the first tab (0)
 var currentSubdetTab = 0;

@@ -25,7 +25,7 @@
       window.parent.postMessage("resize", "*");
     }
 </script>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <link rel="preconnect" href="https://fonts.gstatic.com"> 
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto:300" rel="stylesheet">
@@ -165,12 +165,20 @@
                         Wrong: <input value = "0" type = "text" class = "app_levelwrong" id="app_wrong_number" disabled/>/ 5
                     </p>
                 </div>
-                <div class = "detector" id="detector-holder">  
+                <div id="detector-holder">  
                     <canvas class = "responsive-canvas" id="detector_core" width = "1200" height = "1200"> 
                         <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
                     </canvas>
                     <canvas class = "responsive-canvas" id = "detector_events" width="1200" height="1200" hidden></canvas>  
-                    <button id = "start" value = "start"><a>Start</a></button>
+                    <div id = "startPopup">
+                        <div class="difficultyButtonsContainer">
+                            Choose difficulty:
+                            <button class="difficultyButtons" id="beginner" value="0">Beginner</button>
+                            <button class="difficultyButtons" id="intermediate" value="1">Intermediate</button>
+                            <button class="difficultyButtons" id="expert" value="2">Expert</button>
+                        </div>                 
+                        <button id = "start" value = "start"><a>Start</a></button>
+                    </div>
                 </div>  
                 <div class ="app_input">
                     <div class = "userParticle">

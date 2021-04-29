@@ -1,4 +1,4 @@
-function ParticleDraw(type, submitted)
+function ParticleDraw(type)
 {
     this.type = type;  
     this.sign = (Math.random() - 0.5 >= 0)? 1 : -1;
@@ -7,37 +7,39 @@ function ParticleDraw(type, submitted)
     this.cpy1 = 0;
     this.cpy2 = 0;
     this.alpha = 1;
+    this.radius = 1;
 
     switch (this.type.name){
         case 'photon':
-            this.length = detector.radius.siliconSpace * 1.2 * detector.ratio + (detector.radius.ecal * detector.ratio - detector.radius.siliconSpace * detector.ratio) * 0.6 * Math.random();
+            this.length = detector.radius.siliconSpace * 1.2 * detector.ratio + (detector.radius.ecal * detector.ratio - detector.radius.siliconSpace * detector.ratio) * 0.4 * Math.random();
             this.direction = Math.random()*Math.PI*2;
             this.cpy1 = 0;
-            this.cpy2 = 0;
+            this.muon = false;
             break;
         case 'electron':
-            this.length = detector.radius.siliconSpace * 1.2 * detector.ratio + (detector.radius.ecal * detector.ratio - detector.radius.siliconSpace * detector.ratio) * 0.6 * Math.random();
+            this.length = detector.radius.siliconSpace * 1.2 * detector.ratio + (detector.radius.ecal * detector.ratio - detector.radius.siliconSpace * detector.ratio) * 0.4 * Math.random();
             this.direction = Math.random()*Math.PI*2;
-            this.cpy1 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
-            this.cpy2 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
+            this.cpy1 = this.length/(Math.max(4, Math.ceil(8*Math.random())));
+            this.muon = false;
             break;
         case 'muon':
             this.length = 2 * detector.radius.magnet
             this.direction = Math.random()*Math.PI*2;
             this.cpy1 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
             this.cpy2 = -this.length/(Math.max(4, Math.ceil(10*Math.random())));
+            this.muon = true;
             break;
         case 'nhadron':
             this.length = detector.radius.ecalSpace * 1.2 * detector.ratio + (detector.radius.hcal * detector.ratio - detector.radius.ecalSpace * detector.ratio) * 0.6 * Math.random();
             this.direction = Math.random()*Math.PI*2;
             this.cpy1 = 0;
-            this.cpy2 = 0;
+            this.muon = false;
             break;
         case 'chadron':
             this.length = detector.radius.ecalSpace * 1.2 * detector.ratio + (detector.radius.hcal * detector.ratio - detector.radius.ecalSpace * detector.ratio) * 0.6 * Math.random();
             this.direction = Math.random()*Math.PI*2;
-            this.cpy1 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
-            this.cpy2 = this.length/(Math.max(4, Math.ceil(10*Math.random())));
+            this.cpy1 = this.length/(Math.max(4, Math.ceil(8*Math.random())));
+            this.muon = false;
             break;    
     }
     //calls the function below
@@ -54,11 +56,20 @@ ParticleDraw.prototype.draw = function(duration, init){
 
     ctx.save();
 
+    if(this.radius<800){
+        this.radius += 10;
+        var rad = ctx.createRadialGradient(cx, cy, this.radius, cx, cy, this.radius+1);
+        rad.addColorStop(0, this.type.color);
+        rad.addColorStop(this.radius/850, "rgba(247,247,247,0)");    
+        ctx.strokeStyle = rad;
+    }else{
+        ctx.strokeStyle = this.type.color;
+    }
+        
     ctx.globalAlpha = this.alpha;
-    ctx.strokeStyle = this.type.color;
     ctx.fillStyle = this.type.color;
     ctx.lineWidth = width;
-    
+
     ctx.translate(cx, cy);
     ctx.rotate(this.direction);
     ctx.translate(-cx, -cy);
@@ -66,27 +77,35 @@ ParticleDraw.prototype.draw = function(duration, init){
     ctx.beginPath();
     ctx.moveTo(cx,cy);
 
-    ctx.bezierCurveTo(
+    if(this.muon){
+        ctx.bezierCurveTo(
         cx + this.length/2,
         cy + this.sign * (this.cpy1),
         cx + this.length/2,
         cy + this.sign * (this.cpy2),
         cx + this.length,
-        cy
-    )
-    
+        cy) 
+    } else{
+        ctx.quadraticCurveTo(
+        cx + this.length/2,
+        cy + this.sign * (this.cpy1),
+        cx + this.length,
+        cy)
+    }
+ 
     ctx.stroke();
     ctx.restore();
 
-    //control how long the tracks stay for here
-    let index, subLevel, sum, time;
+    //controls how long the tracks stay for here
+    let index, difficulty, time;
     index = game.level.main.displayValue;
-    subLevel = game.level.sub.displayValue;
-    sum = index + subLevel;
-    time = 100*Math.min((index + 2), 5) + 400*Math.max((index - 4), 0);
-        //this makes sure the very first track stays up longer than normal
-        //a makeshift way to handle with the long load time after clicking start
+    difficulty = game.difficulty;
+    time = 100*Math.min((index + 2), 5) + 300*Math.max((index - 3), 0);
+
     if(!init){
-        this.alpha -= 0.0005/16*duration;
-    }
+        console.log(this.radius)
+        if(this.radius>800){
+            this.alpha -= ((0.008 - Math.min((0.00001*time), 0.0079)) * difficulty)/16*duration;
+        }
+    }    
 }
