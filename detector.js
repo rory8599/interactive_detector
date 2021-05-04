@@ -15,8 +15,8 @@ var detector = {
 
     visible: true,
 
-    width: 1200,
-    height: 1200,
+    width: 600,
+    height: 600,
 
     ratio: 1,
 
@@ -32,15 +32,15 @@ var detector = {
     //change the detector to show the full thing instead of quarter sector (so radius is halved)
     radius:
     {
-        silicon: 0.11*1200,
-        siliconSpace: 0.116*1200,
-        ecal: 0.168*1200,
-        ecalSpace: 0.172*1200,
-        hcal: 0.254*1200,
-        hcalSpace: 0.265*1200,
-        magnet: 0.302*1200,
-        magnetSpace: 0.312*1200,
-        muon: 0.49*1200
+        silicon: 0.11*600,
+        siliconSpace: 0.116*600,
+        ecal: 0.168*600,
+        ecalSpace: 0.172*600,
+        hcal: 0.254*600,
+        hcalSpace: 0.265*600,
+        magnet: 0.302*600,
+        magnetSpace: 0.312*600,
+        muon: 0.49*600
     },
 
     tracks:
@@ -98,7 +98,7 @@ var detector = {
 
         var ratio = devicePixelRatio/backingStoreRatio;
 
-        detector.ratio = baseSize/1200;
+        detector.ratio = baseSize/600;
 
         detector.width = baseSize;
         detector.height = baseSize;
@@ -201,7 +201,9 @@ var detector = {
 
         for (var j = 0, len1 = particles.length; j<len1; j++){
             var index = particles.shift();
-            var event = new ParticleDraw(detector.tracks[index]);
+            var number = j;
+            console.log(number)
+            var event = new ParticleDraw(detector.tracks[index], number);
             detector.events.list.push(event)
         }
     },
@@ -243,4 +245,4 @@ window.requestAnimFrame =(function(){
 })();
 
 //below the function is wrapped in () to make it an immediately invoked function expressions (or self-executing)
-(function() { detector.init(1200); $('#detector').width(1200).height(1200); })();
+(function() { detector.init(600); $('#detector').width(600).height(600); })();

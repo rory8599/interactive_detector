@@ -4,7 +4,7 @@ body {
  	background-color: rgb(250, 255, 255);
     font-size: 11px;
     Font-Family: 'Lato', Sans-Serif;
-    overflow: hidden;
+    overflow: auto;
 }
 
 * {
@@ -37,6 +37,10 @@ body {
     box-shadow: 0 0 5px 5px #bbbbbb;
     align-items: center;
     padding: 10px
+}
+
+.difficultyButtonsContainer{
+    width: max-content;
 }
 
 .difficultyButtons.active{
@@ -343,8 +347,7 @@ hr.rounded{
 }
 
 .socialLogo{
-    width: 4vmax;
-    height: 4vmax;
+    width: 75%;
     box-shadow: 0 0 10px 1px lightgray;
 }
 
@@ -803,7 +806,14 @@ input {
     }
 
     #app{
-        width: 50%;
+        width: 45vw;
+    }
+
+    .responsive-canvas{    
+        height: 50vmin;  
+        width: 50vmin;
+        max-height: none;
+        max-width: none;
     }
 
     .info{
@@ -828,7 +838,7 @@ input {
     #menu, #moreInfo{
         flex: 1;
         z-index: 9;
-        width: 25%;  
+        width: 30vw;  
     }
 
     .panel-title{
@@ -852,11 +862,6 @@ input {
 @media screen and (min-width: 1200px) {
     body{
         font-size: 18px;
-    }
-
-    .responsive-canvas{    
-        max-height: 500px;  
-        max-width: 500px;
     }
 }
 
