@@ -43,7 +43,6 @@ for(var i = 0; i<diffButtons.length; i++){
     },false);
 }
 
-
 //Buttons - handles the inputs
 const buttons = document.querySelectorAll('.inputbuttons');
 
@@ -51,12 +50,10 @@ for(var i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", event => handleButtons(event))
 }
 
-function handleButtons(event) {
-    
+function handleButtons(event) {   
     if (!event.target.matches('button')) {
         return;
     }
-
     switch (event.target.value) {
         case 'clear':
             handleClear();
@@ -164,7 +161,6 @@ function updateWrong() {
     wrong.value = game.wrong.displayValue;
 };
 
-
 //Generate random number - creates outputs
 function randomGenerate(number) {    
     let max = Math.pow(5, number) - 1;
@@ -173,7 +169,6 @@ function randomGenerate(number) {
     game.question = rand.toString(5);
     detector.handleQuestion();
 };
-
 
 function compareUserInput(userInput) {
     let question = game.question;
@@ -186,8 +181,7 @@ function compareUserInput(userInput) {
 
     function checkForMatch(userInputArray, questionArray) {
         if(userInputArray.length < questionArray.length)
-            {numberWrong += questionArray.length - userInputArray.length};
-        
+            {numberWrong += questionArray.length - userInputArray.length};      
         for(var i = 0; i< userInputArray.length; i++) {
             var match = false;
             for(var j = 0; j < questionArray.length; j++) {
@@ -197,7 +191,6 @@ function compareUserInput(userInput) {
                     break;
                 }
             }                    
-
             if(!match){
                 wrongArray.push(userInputArray[i]);
             }
@@ -233,14 +226,12 @@ function compareUserInput(userInput) {
             holder.classList.remove('animate__animated', 'animate__shakeX');
         });
     }
-
     if(game.wrong.displayValue < 5){
         randomGenerate(game.level.main.displayValue);
     }
     else{
         endGame(questionArray, wrongArray);
     }
-
 };
 
 function endGame(missed, extra) {
