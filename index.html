@@ -2,11 +2,8 @@
 <html lang = "en">
 
 <head>
-
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 
 <title>
     Particle Identifier
@@ -40,7 +37,6 @@
                 This game works best in landscape on mobile.
             </div>
         </div>
-
         <div id = "introPopup">
             <form id="regForm">
             <a href="javascript:void(0)" class="closebtn" id = "closePopup" onclick="closePopup()">&times;</a>
@@ -156,13 +152,22 @@
                         
         <!-- The central app showing the detector, events, input, and score -->
         <div  id = "app" class = "main">
-            <div id = "main_app">
+            <div id = "startPopup">
+                    <div class="difficultyButtonsContainer">
+                        Choose difficulty:
+                        <button class="difficultyButtons active" id="beginner" value="0">Beginner</button>
+                        <button class="difficultyButtons" id="intermediate" value="1">Intermediate</button>
+                        <button class="difficultyButtons" id="expert" value="2">Expert</button>
+                    </div>                 
+                    <button id = "start" value = "start"><a>Start</a></button>
+            </div>
+            <div id = "main_app">    
                 <div class="app_initoutput">
-                    <p id="app_level">
-                        Level: <input value = "1" type = "text" class = "app_levelwrong" id="app_level_main" disabled/> - <input value = "1" type = "text" class = "app_levelwrong" id = "app_level_sub" disabled/>
+                    <p id="app_correct">
+                        Correct: <input value = "0" type = "text" class = "app_correctwrong" id="app_correct_number" disabled/>
                     </p>
                     <p id="app_wrong">
-                        Wrong: <input value = "0" type = "text" class = "app_levelwrong" id="app_wrong_number" disabled/>/ 5
+                        Wrong: <input value = "0" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
                     </p>
                 </div>
                 <div id="detector-holder">  
@@ -170,30 +175,21 @@
                         <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
                     </canvas>
                     <canvas class = "responsive-canvas" id = "detector_events" width="600" height="600" hidden></canvas>  
-                    <div id = "startPopup">
-                        <div class="difficultyButtonsContainer">
-                            Choose difficulty:
-                            <button class="difficultyButtons" id="beginner" value="0">Beginner</button>
-                            <button class="difficultyButtons" id="intermediate" value="1">Intermediate</button>
-                            <button class="difficultyButtons" id="expert" value="2">Expert</button>
-                        </div>                 
-                        <button id = "start" value = "start"><a>Start</a></button>
-                    </div>
                 </div>  
                 <div class ="app_input">
                     <div class = "userParticle">
                         <p>Particles: </p><textarea type = "text" value = "" id="userParticle" disabled></textarea>
                     </div>         
                     <div class ="inputbuttons">                            
-                        <button id = "photon" name = "0" value = "0" >Photon</button>
-                        <button id = "electron" name = "1" value = "1" >Electron</button>
-                        <button id = "muon" name = "2" value = "2" >Muon</button>
-                        <button id = "nhadron" name = "3" value = "3" >Neutral Hadron</button>
-                        <button id = "chadron" name = "4" value = "4" >Charged Hadron</button>
+                        <button class ="inButtons" id = "photon" name = "0" value = "0" >Photon</button>
+                        <button class ="inButtons" id = "electron" name = "1" value = "1" >Electron</button>
+                        <button class ="inButtons" id = "muon" name = "2" value = "2" >Muon</button>
+                        <button class ="inButtons" id = "nhadron" name = "3" value = "3" >Neutral Hadron</button>
+                        <button class ="inButtons" id = "chadron" name = "4" value = "4" >Charged Hadron</button>
                         
-                        <button id = "clear" value = "clear" name = "Clear" >Clear</button>
-                        <button id = "submit" value = "submit" name = "Submit" >Submit</button>
-                        <button id = "restart" value = "restart" name = "Restart" >Restart</button>
+                        <button class ="inButtons" id = "clear" value = "clear" name = "Clear" >Clear</button>
+                        <button class ="inButtons" id = "submit" value = "submit" name = "Submit" >Submit</button>
+                        <button class ="inButtons" id = "restart" value = "restart" name = "Restart" >Restart</button>
                     </div>
                     <div class = "endgame" hidden>
                         <p>Better luck next time! <br><br> 
@@ -201,7 +197,6 @@
                             <p id="missedMessage" hidden>You just missed: <a id = "missedParticles"></a> </p>
                             <p id="extraMessage" hidden>You incorrectly added: <a id = "extraParticles"></a> </p>
                         </p>
-                        <button id = "showAllTracks">Show last particles</button>
                         <button id = "restart_end" value = "restart" name = "Restart" >Restart</button>
                     </div>
                 </div>  

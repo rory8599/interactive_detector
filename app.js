@@ -11,6 +11,9 @@ var game = {
             displayValue: 1,
         }
     },
+    correct: {
+        displayValue: 0,
+    },
     wrong: {
         displayValue: 0,
     },
@@ -23,11 +26,16 @@ var game = {
     }
     
 };
+const buttons = document.querySelectorAll('.inputbuttons');
 
 //Handle start
 document.getElementById('start').addEventListener("click", function(){
     document.getElementById('startPopup').style.visibility = 'hidden';
     document.getElementById('detector_events').hidden = false;
+    for(var i=0; i<buttons.length; i++){
+        buttons[i].disabled = false;
+        console.log(buttons[i].disabled)
+    }
     randomGenerate(1);
 }, false);
 
@@ -44,8 +52,6 @@ for(var i = 0; i<diffButtons.length; i++){
 }
 
 //Buttons - handles the inputs
-const buttons = document.querySelectorAll('.inputbuttons');
-
 for(var i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", event => handleButtons(event))
 }
@@ -100,9 +106,9 @@ function handleRestart() {
     document.getElementById('extraMessage').hidden = true;
     document.getElementById('userParticle').value = "";
     game.level.main.displayValue = 1;
-        updateMainLevel();
     game.level.sub.displayValue = 1;
-        updateSubLevel();
+    game.correct.displayValue = 0;
+        updateCorrect();
     game.wrong.displayValue = 0;
         updateWrong();
     document.getElementById('startPopup').style.visibility = 'visible';
@@ -146,14 +152,9 @@ function numberToParticle(numberArray) {
 }
 
 //Level and wrong displays - functions to update 
-function updateMainLevel() {
-    let main = document.getElementById('app_level_main');
-    main.value = game.level.main.displayValue;
-};
-
-function updateSubLevel() {
-    let sub = document.getElementById('app_level_sub');
-    sub.value = game.level.sub.displayValue;
+function updateCorrect() {
+    let correct = document.getElementById('app_correct_number');
+    correct.value = game.correct.displayValue;
 };
 
 function updateWrong() {
@@ -172,16 +173,16 @@ function randomGenerate(number) {
 
 function compareUserInput(userInput) {
     let question = game.question;
-    let allParticles = game.allQuestions;
-    game.allQuestions = allParticles.concat(question);
     let userInputArray = userInput.split("").sort();
     let questionArray = question.split("").sort();
     let numberWrong = 0; 
+    let numberCorrect = 0;
     var wrongArray = [];
 
     function checkForMatch(userInputArray, questionArray) {
-        if(userInputArray.length < questionArray.length)
-            {numberWrong += questionArray.length - userInputArray.length};      
+        if(userInputArray.length < questionArray.length) {
+            numberWrong += questionArray.length - userInputArray.length
+        };      
         for(var i = 0; i< userInputArray.length; i++) {
             var match = false;
             for(var j = 0; j < questionArray.length; j++) {
@@ -195,6 +196,9 @@ function compareUserInput(userInput) {
                 wrongArray.push(userInputArray[i]);
             }
         }
+        numberCorrect += game.level.main.displayValue - questionArray.length;
+        game.correct.displayValue += numberCorrect;
+        updateCorrect();
         numberWrong += wrongArray.length;
         if(numberWrong>0){
             return false
@@ -207,13 +211,10 @@ function compareUserInput(userInput) {
     if(correct){
         if(game.level.sub.displayValue < 5){
             game.level.sub.displayValue = ++ game.level.sub.displayValue;
-            updateSubLevel();
         }
         else if(game.level.sub.displayValue == 5){
             game.level.main.displayValue = ++ game.level.main.displayValue;
             game.level.sub.displayValue = 1;
-            updateMainLevel();
-            updateSubLevel();
         }
     }
     else{
@@ -230,6 +231,9 @@ function compareUserInput(userInput) {
         randomGenerate(game.level.main.displayValue);
     }
     else{
+        for(var i=0; i<buttons.length; i++){
+            buttons[i].disabled = true;
+        }
         endGame(questionArray, wrongArray);
     }
 };
@@ -243,9 +247,7 @@ function endGame(missed, extra) {
     document.querySelector('.userParticle').style.visibility = 'hidden';
     document.querySelector(".endgame").hidden = false;
 
-    let m = game.level.main.displayValue;
-        s = game.level.sub.displayValue;
-    document.getElementById('correctParticles').innerHTML = (s-1) * m + 2.5 * m * (m-1);
+    document.getElementById('correctParticles').innerHTML = game.correct.displayValue;
 
     if(missed.length>0){
         document.getElementById('missedMessage').hidden = false;
@@ -255,10 +257,6 @@ function endGame(missed, extra) {
         document.getElementById('extraMessage').hidden = false;
         document.getElementById('extraParticles').innerHTML = numberToParticle(extra.map(Number));
     }
-
-    game.question = game.allQuestions;
-    document.getElementById('showAllTracks').addEventListener("click", function(){
-        detector.handleQuestion()}, false);
     document.getElementById('restart_end').addEventListener("click", function(){
         handleRestart()}, false);
 }

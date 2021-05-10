@@ -202,7 +202,6 @@ var detector = {
         for (var j = 0, len1 = particles.length; j<len1; j++){
             var index = particles.shift();
             var number = j;
-            console.log(number)
             var event = new ParticleDraw(detector.tracks[index], number);
             detector.events.list.push(event)
         }
