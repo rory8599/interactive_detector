@@ -5,7 +5,7 @@ body {
  	background-color: rgb(250, 255, 255);
     font-size: 11px;
     Font-Family: 'Lato', Sans-Serif;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .container_{
@@ -38,7 +38,7 @@ body {
 #startPopup{
     display: flex;
     flex-flow: column nowrap;
-    z-index: 19;
+    z-index: 8;
     background-color: #ffffff;
     box-shadow: 0 0 5px 5px #bbbbbb;
     align-items: center;
@@ -59,27 +59,22 @@ body {
     
 #main_app {    
     display: grid; 
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-columns: 50%;
+    grid-template-rows: 75% 20%;
     grid-template-areas: 
-    "main header"
-    "main header"
     "main footer"
-    "main footer"
-    "main footer"
-    "main footer"
-    "main footer";
-    grid-gap: 20px;
+    "header footer";
+    column-gap: 20px;
     grid-auto-flow: dense;
     height: 95vh;
     height: calc(var(--vh, 1vh) * 95);
 }
 
 .responsive-canvas{
-    height: 70vmin;
-    width: 70vmin;      
-    max-height: 250px;  
-    max-width: 250px;
+    height: 65vmin;
+    width: 65vmin;      
+    max-height: 65vmin;  
+    max-width: 65vmin;
 }
 
 /* The detector canvases */
@@ -88,7 +83,6 @@ body {
         display: flex;
         justify-content: center;   
         align-items: center;
-        padding: 0 0 20px 20px;
     }
 
     #detector_core{
@@ -108,14 +102,14 @@ body {
 /* The Level and Wrong displays*/ 
     .app_initoutput{
         grid-area: header;
-        align-self: self-start;
+        align-self: self-end;
         display: flex;
         flex-flow: row nowrap;
-        background-color: rgba(250,250,250);
-        margin: 15px;
+        background-color: rgba(250,250,250,0.1);
+        margin: 1% 5%;
         padding: 2%;
         text-align: center;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         font-size: 110%;
         z-index: 5;
@@ -140,7 +134,6 @@ body {
         background-color: rgb(250,250,250);
         margin: 15px;
         padding: 5%;
-        align-self: self-end;
     }
 
     .userParticle{
@@ -150,8 +143,8 @@ body {
 
     #userParticle{
         width: 90%;
-        height: 10vh;
-        max-height: 12vh;
+        height: 18vh;
+        max-height: 18vh;
         font-size: 100%;
     }
 
@@ -225,8 +218,6 @@ body {
             #start{
                 position: relative;
                 overflow: hidden;
-                width: 20vmin;
-                height: 8vmin;
                 border: 3px solid rgba(255, 255, 255, 0.8);
             }
               
@@ -446,6 +437,7 @@ hr.rounded{
         grid-template-areas: 
         "title"
         "main";
+        grid-template-rows: 20% 65%;
     }
 
     .subdetTab h3, .particlesTab h3{
@@ -454,12 +446,12 @@ hr.rounded{
         z-index: 13;
         padding: 0 20px;
         Font-Family: 'Roboto', Sans-Serif;
+        margin: 5px;
     }
 
     .subdetTab .tabText, .particlesTab .tabText{
         grid-area: main;
         margin: 0;
-        height: 60vmin;
         z-index: 12;
         padding: 10px 30px 10px 15px;
         text-shadow: 0 0 10px white;
@@ -751,10 +743,6 @@ input {
     .app_initoutput{
         align-self: self-end;
         font-size: 125%;
-    }
-
-    .app_input{
-        align-self: self-start;
     }
 
     .tab .tabText{

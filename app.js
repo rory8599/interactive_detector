@@ -34,7 +34,6 @@ document.getElementById('start').addEventListener("click", function(){
     document.getElementById('detector_events').hidden = false;
     for(var i=0; i<buttons.length; i++){
         buttons[i].disabled = false;
-        console.log(buttons[i].disabled)
     }
     randomGenerate(1);
 }, false);

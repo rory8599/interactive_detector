@@ -137,7 +137,11 @@ function openMenu() {
     document.getElementById('moreInfo').style.width = '0px';
     document.getElementById('infoTabsContainerRight').style.display = "none";
     document.getElementById('menu').style.width = '50%';
-    document.getElementById('infoTabsContainerLeft').style.display = "inline";
+    setTimeout(
+      function(){
+        document.getElementById('infoTabsContainerLeft').style.display = "inline";
+      },
+      400);
     openInfoTab(event,'rulesBody');
 }
 
@@ -145,7 +149,11 @@ function openInfo(){
     document.getElementById('menu').style.width = '0px';
     document.getElementById('infoTabsContainerLeft').style.display = "none";
     document.getElementById('moreInfo').style.width = '50%';
-    document.getElementById('infoTabsContainerRight').style.display = "inline";
+    setTimeout(
+      function(){
+        document.getElementById('infoTabsContainerRight').style.display = "inline" 
+      }, 
+      400);
     openInfoTab(event, 'subdetBody');
 }
 
