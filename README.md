@@ -18,3 +18,5 @@ Starting upload to github with the game at stage where random base 5 number is g
 29/4 (ii): Added a difficulty setting which varies the time tracks are shown. The tracks are now successfully animated to draw out from the centre - and should also be in quite an optimised way. The detector also shakes when a question is wrong - this may cause a bit too much lag so want to check that xx
 
 4/5: Minor tweaks made to improve responsive web design and avoid tracks overlapping
+
+10/5: More minor tweaks to hopefully improve the layout on mobiles - specifically to account for search bars in browsers on mobile which have a more significant impact. Also changed the game to show the number of particles correct instead of the level.
