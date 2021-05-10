@@ -55,7 +55,7 @@ ParticleDraw.prototype.draw = function(duration, init){
     var ctx = detector.events.ctx;
     var cx = detector.width/2;
     var cy = detector.height/2;
-    var width = 3 * (1 + (window.screen.availWidth > 992 ? 0 : 1));
+    var width = 2.5 * (1 + (window.screen.availWidth > 992 ? 0 : 1));
 
     ctx.save();
 
