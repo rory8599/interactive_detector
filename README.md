@@ -20,3 +20,5 @@ Starting upload to github with the game at stage where random base 5 number is g
 4/5: Minor tweaks made to improve responsive web design and avoid tracks overlapping
 
 10/5: More minor tweaks to hopefully improve the layout on mobiles - specifically to account for search bars in browsers on mobile which have a more significant impact. Also changed the game to show the number of particles correct instead of the level.
+
+10/5 (ii): More adjustments to the layout so it fits better on mobile screen - moved the correct and wrong displays to the bottom left to give more space to the input area
