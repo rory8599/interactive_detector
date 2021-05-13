@@ -22,3 +22,5 @@ Starting upload to github with the game at stage where random base 5 number is g
 10/5: More minor tweaks to hopefully improve the layout on mobiles - specifically to account for search bars in browsers on mobile which have a more significant impact. Also changed the game to show the number of particles correct instead of the level.
 
 10/5 (ii): More adjustments to the layout so it fits better on mobile screen - moved the correct and wrong displays to the bottom left to give more space to the input area
+
+13/5: Added a background similar to the CMS cavern. It's relatively simple and I'm putting it in with a view to adding a whole area above up to the surface which the player will travel through during the introduction. I wanna work on making this more stylized to add some more character which even this simple line drawing and textures does. I also want to find a better place to put the side panels as they don't look great on desktop and make the screen too busy. (I've also changed the buttons layout here so they shouldn't overflow - particularly with the hadron labels). I wanna test this version to see how the background (and buttons) fits on different devices
