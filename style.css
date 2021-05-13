@@ -34,7 +34,23 @@ body {
     font-size: 18px;
     padding: 15px;
 }
+/* The background images */
 
+#cavern{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#cavernImage{
+    position: fixed;
+    opacity: 0.95;
+    height: 100vh;
+    top: 0px;
+}
+
+/* The game elements */
 #startPopup{
     display: flex;
     flex-flow: column nowrap;
@@ -85,9 +101,15 @@ body {
         align-items: center;
     }
 
+    #detectorCanvases{
+        display: flex;
+        justify-content: center;   
+        align-items: center;
+    }
+
     #detector_core{
         position: absolute;
-        z-index: 0;
+        z-index: 2;
     }
 
     #detector_events{
@@ -133,7 +155,7 @@ body {
         z-index: 4;
         background-color: rgb(250,250,250);
         margin: 15px;
-        padding: 5%;
+        padding: 3%;
     }
 
     .userParticle{
@@ -143,7 +165,7 @@ body {
 
     #userParticle{
         width: 90%;
-        height: 18vh;
+        height: 12vh;
         max-height: 18vh;
         font-size: 100%;
     }
@@ -164,8 +186,6 @@ body {
             flex: 2 1 40%;
             width: 95%;
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            grid-template-rows: repeat(3, 40px);
             grid-template-areas: 
             "photon photon electron electron muon muon"
             "nhadron nhadron nhadron chadron chadron chadron"
@@ -815,8 +835,8 @@ input {
     }
 
     .responsive-canvas{    
-        max-height: 400px;
-        max-width: 400px;
+        max-height: 500px;
+        max-width: 500px;
     }
 
     .info{
@@ -866,6 +886,11 @@ input {
 @media screen and (min-width: 1200px) {
     body{
         font-size: 18px;
+    }
+
+    .responsive-canvas{    
+        max-height: 750px;
+        max-width: 750px;
     }
 }
 
