@@ -170,11 +170,16 @@
                         Wrong: <input value = "0" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
                     </p>
                 </div>
-                <div id="detector-holder">  
-                    <canvas class = "responsive-canvas" id="detector_core" width = "600" height = "600"> 
-                        <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
-                    </canvas>
-                    <canvas class = "responsive-canvas" id = "detector_events" width="600" height="600" hidden></canvas>  
+                <div id="detector-holder"> 
+                    <div class = "background" id = "cavern">
+                        <img src = "assets/Background/BackgroundCavern-01.png" id="cavernImage">
+                    </div> 
+                    <div id = detectorCanvases>
+                        <canvas class = "responsive-canvas" id="detector_core" style="width: 65vmin; height: 65vmin;"> 
+                            <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
+                        </canvas>
+                        <canvas class = "responsive-canvas" id = "detector_events" style="width: 65vmin; height: 65vmin;" hidden></canvas> 
+                    </div>
                 </div>  
                 <div class ="app_input">
                     <div class = "userParticle">

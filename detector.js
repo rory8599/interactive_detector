@@ -26,7 +26,7 @@ var detector = {
         ecal: '#9AD35F',   
         hcal: '#D6EB58',
         magnet:'#89877B',
-        background: 'rgb(250, 255, 255)'
+        background: 'rgba(205, 205, 205, 0.7)'
     },
     //radius here goes to the outer edge of the respective subdetector boundary
     //change the detector to show the full thing instead of quarter sector (so radius is halved)
