@@ -113,35 +113,39 @@ function openPopup(){
 
 //tabs for when mobile is in landscape
 function openInfoTab(evt, tabName) {
-    // Declare all variables
-    var i, infoTabContent, tablinks;
-  
-    // Get all elements with class="tabcontent" and hide them
-    infoTabContent = document.getElementsByClassName("infoTabContent");
+  var i, infoTabContent, tablinks;
+  infoTabContent = document.getElementsByClassName("infoTabContent");
+  for (i = 0; i < infoTabContent.length; i++) {
+    infoTabContent[i].style.display = "none";
+  }
+
+  // Get all elements with class="tablinks" and remove the class "active"
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+
+  // Show the current tab, and add an "active" class to the button that opened the tab
+  document.getElementById(tabName).style.display = "block";
+  if(window.innerWidth>=992){
     for (i = 0; i < infoTabContent.length; i++) {
-      infoTabContent[i].style.display = "none";
+      infoTabContent[i].style.display = "block";
     }
-  
-    // Get all elements with class="tablinks" and remove the class "active"
-    tablinks = document.getElementsByClassName("tablinks");
-    for (i = 0; i < tablinks.length; i++) {
-      tablinks[i].className = tablinks[i].className.replace(" active", "");
-    }
-  
-    // Show the current tab, and add an "active" class to the button that opened the tab
-    document.getElementById(tabName).style.display = "block";
-    evt.currentTarget.className += " active";
+  }
+  evt.currentTarget.className += " active";
 }
 
 function openMenu() {
     document.getElementById('moreInfo').style.width = '0px';
     document.getElementById('infoTabsContainerRight').style.display = "none";
     document.getElementById('menu').style.width = '50%';
-    setTimeout(
-      function(){
-        document.getElementById('infoTabsContainerLeft').style.display = "inline";
-      },
-      400);
+    if(window.innerWidth<992){
+      setTimeout(
+        function(){
+          document.getElementById('infoTabsContainerLeft').style.display = "inline";
+        },
+        400);
+    }
     openInfoTab(event,'rulesBody');
 }
 
@@ -149,11 +153,13 @@ function openInfo(){
     document.getElementById('menu').style.width = '0px';
     document.getElementById('infoTabsContainerLeft').style.display = "none";
     document.getElementById('moreInfo').style.width = '50%';
-    setTimeout(
-      function(){
-        document.getElementById('infoTabsContainerRight').style.display = "inline" 
-      }, 
-      400);
+    if(window.innerWidth<992){
+      setTimeout(
+        function(){
+          document.getElementById('infoTabsContainerRight').style.display = "inline" 
+        }, 
+        400);
+      }
     openInfoTab(event, 'subdetBody');
 }
 
@@ -164,14 +170,10 @@ function closeNav(){
     document.getElementById('infoTabsContainerRight').style.display = "none";
 }
 
-// First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+//rensponsive to resize of inner height
 let vh = window.innerHeight * 0.01;
-// Then we set the value in the --vh custom property to the root of the document
 document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-// We listen to the resize event
 window.addEventListener('resize', () => {
-  // We execute the same script as before
   let vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 });
