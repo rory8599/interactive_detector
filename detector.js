@@ -26,7 +26,7 @@ var detector = {
         ecal: '#9AD35F',   
         hcal: '#D6EB58',
         magnet:'#89877B',
-        background: 'rgba(205, 205, 205, 0.7)'
+        background: 'rgba(120, 120, 120, 0.7)'
     },
     //radius here goes to the outer edge of the respective subdetector boundary
     //change the detector to show the full thing instead of quarter sector (so radius is halved)
@@ -132,20 +132,12 @@ var detector = {
     },
 
     coreDraw: function()
-    {
-        
-        
+    { 
         var ctx = detector.core.ctx;
         var cx = detector.width/2
         var cy = detector.height/2
 
         ctx.clearRect(0, 0, detector.width, detector.height);
-
-        muontracker_image = new Image();
-        muontracker_image.src = 'assets/MuonTracker_whole1.png';
-        muontracker_image.onload = function(){
-            ctx.drawImage(muontracker_image, 0, 0, detector.width, detector.height);
-        }
 
         //magnet
         ctx.beginPath();

@@ -107,7 +107,7 @@ ParticleDraw.prototype.draw = function(duration, init){
 
     if(!init){
         if(this.radius>800){
-            this.alpha -= ((0.008 - Math.min((0.00001*time), 0.0079)) * difficulty)/16*duration;
+            this.alpha -= 0.0035 * index * ((3*difficulty-1)/2) * duration/16;
         }
     }    
 }

@@ -32,6 +32,7 @@
 
 <body translate= "no">
     <div class = "container_">
+        <img class="backgroundImage" id="grainWall" src="assets/Background/SpongeWall.png">
         <div id = "mobilePortraitContainer">
             <div id = "mobilePortraitMessage">
                 This game works best in landscape on mobile.
@@ -63,15 +64,15 @@
                 <p class="tabText">
                     The Large Hadron Collider at CERN is the world's largest and most powerful particle accelerator. Experiments here are designed to test the limits of particle physics, to try and better understand the building blocks of the universe.
                     <br>
-                    In the LHC, particles are accelerated to almost the speed of the light, and then they’re collided at one of the detectors creating a huge burst of energy and a vast number of particles - some of which have never been seen before!  
+                    In the LHC, particles are accelerated to almost the speed of light, and then they’re collided at one of the detectors creating a huge burst of energy and a vast number of particles - some of which have never been seen before!  
                     <br><br>
-                    Many of the particles created are very unstable and will decay within a fraction of a second often into one of 5 types that scientists can detect.
+                    Many of the particles created are very unstable and will decay within a fraction of a second - often into one of five types of particles that scientists can detect.
                 </p><img src = "assets/CERNParticlecollision.png" class = "tabImage" id ="collisionImage">
             </div>
             <div class="tab">
                 <h3 class = "tabHeader">The Particles</h3>
                 <p class="tabText">
-                    The CERN experiments can detect and track 5 types of particles. These are: photons, electrons, muons, neutral hadrons, charged hadrons. These all have different properties (such as mass, electric charge etc.) which means they behave differently in our detector - this is how physicists (<span style="font-style: italic; display: inline;">and you</span>) can tell them apart. 
+                    The CERN experiments can detect and track five types of particles. These are: photons, electrons, muons, neutral hadrons, charged hadrons. These all have different properties (such as mass, electric charge etc.) which means they behave differently in our detector - this is how physicists (<span style="font-style: italic; display: inline;">and you</span>) can tell them apart. 
                     <br><br>
                     Look through the information in the side panels to learn more about what these particles will look like and how the different parts of the detector work.
                 </p><img src = "assets/cmsParticleAnim.gif" class = "tabImage" id ="cmsParticleAnim">
@@ -81,7 +82,7 @@
                 <p class="tabText">
                     Check the info tabs on either side for info on what the particles should look like. Once you press start a random particle track will appear – use the buttons to enter the particle you think it is and press SUBMIT to see if you’ve got it right! 
                     <br>
-                    If you choose right you’ll go up a level and gradually more particles will appear. You can get 5 wrong before the game ends – see how many particles you can correctly identify!
+                    If you choose right you’ll go up a level and gradually more particles will appear. You can get five wrong before the game ends – see how many particles you can correctly identify!
                 </p>
             </div>
             <div class = "nextPrevBtn" style="float:right;">
@@ -163,21 +164,20 @@
             </div>
             <div id = "main_app">    
                 <div class="app_initoutput">
-                    <p id="app_correct">
+                    <span id="app_correct">
                         Correct: <input value = "0" type = "text" class = "app_correctwrong" id="app_correct_number" disabled/>
-                    </p>
-                    <p id="app_wrong">
+                    </span>
+                    <span id="app_wrong">
                         Wrong: <input value = "0" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
-                    </p>
+                    </span>
                 </div>
                 <div id="detector-holder"> 
                     <div class = "background" id = "cavern">
-                        <img src = "assets/Background/BackgroundCavern-01.png" id="cavernImage">
+                        <img src = "assets/Background/BackgroundCavern1-01.png" class="backgroundImage" id="cavernImage">
                     </div> 
                     <div id = detectorCanvases>
-                        <canvas class = "responsive-canvas" id="detector_core" style="width: 65vmin; height: 65vmin;"> 
-                            <img src = "assets/MuonTracker_whole1.png" id = "muon-tracker">
-                        </canvas>
+                        <img src = "assets/Muon tracker-02.png" class="responsive-canvas" id = "muon-tracker">
+                        <canvas class = "responsive-canvas" id="detector_core" style="width: 65vmin; height: 65vmin;"> </canvas>
                         <canvas class = "responsive-canvas" id = "detector_events" style="width: 65vmin; height: 65vmin;" hidden></canvas> 
                     </div>
                 </div>  
@@ -197,7 +197,7 @@
                         <button class ="inButtons" id = "restart" value = "restart" name = "Restart" >Restart</button>
                     </div>
                     <div class = "endgame" hidden>
-                        <p>Better luck next time! <br><br> 
+                        <p>Well done! <br><br> 
                             <a id="correctParticles"></a> particles correctly identified.
                             <p id="missedMessage" hidden>You just missed: <a id = "missedParticles"></a> </p>
                             <p id="extraMessage" hidden>You incorrectly added: <a id = "extraParticles"></a> </p>
@@ -280,7 +280,7 @@
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Photon</h3>
                         <p class="tabText">
-                            Photons are particles of light. They have no mass, no electric charge and they’re elementary which means they’re not made up of smaller particles. Photons interact with matter a lot, its interactions with the eye allow you to read what’s on the screen right now! When they pass through a detector at CERN they’re detected at the electromagnetic calorimeter.                            </p>
+                            Photons are particles of light. They have no mass, no electric charge and they’re elementary which means they’re not made up of smaller particles. Photons interact with matter a lot, their interactions with the eye allow you to read what’s on the screen right now! When they pass through a detector at CERN they’re detected at the electromagnetic calorimeter.                            </p>
                     </div>
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Electron</h3>
