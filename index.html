@@ -32,7 +32,18 @@
 
 <body translate= "no">
     <div class = "container_">
-        <img class="backgroundImage" id="grainWall" src="assets/Background/SpongeWall.png">
+        <div class="border" id="bigBorder">
+            <div class="frames" id="bigFrames">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div class="corners">
+                <div></div>
+                <div></div>
+            </div>
+        </div> 
         <div id = "mobilePortraitContainer">
             <div id = "mobilePortraitMessage">
                 This game works best in landscape on mobile.
@@ -171,10 +182,16 @@
                         Wrong: <input value = "0" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
                     </span>
                 </div>
-                <div id="detector-holder"> 
-                    <div class = "background" id = "cavern">
-                        <img src = "assets/Background/BackgroundCavern1-01.png" class="backgroundImage" id="cavernImage">
+                <div id="detector-holder">
+                    <div class="border">
+                        <div class="frames">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
                     </div> 
+                    <img src = "assets/Background/BackgroundCavern1-01.png" class="backgroundImage" id="cavernImage">
                     <div id = detectorCanvases>
                         <img src = "assets/Muon tracker-03.png" class="responsive-canvas" id = "muon-tracker">
                         <canvas class = "responsive-canvas" id="detector_core" style="width: 65vmin; height: 65vmin;"> </canvas>

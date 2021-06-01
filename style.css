@@ -1,8 +1,5 @@
 body {
-    width: 100vw;
-    height: 100%;
   	margin: 0;
- 	background-color: rgb(250, 255, 255);
     font-size: 11px;
     Font-Family: 'Lato', Sans-Serif;
     overflow: hidden;
@@ -11,6 +8,11 @@ body {
 .container_{
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
+    background-color: rgba(242,248,244,1);
+}
+
+#bigBorder{
+    visibility: hidden;
 }
 
 * {
@@ -36,28 +38,12 @@ body {
 }
 /* The background images */
 
-#cavern{
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.backgroundImage{
-    position: fixed;
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
-    top: 0px;
-}
-
 #cavernImage{
     z-index: 0;
-}
-
-#grainWall{
-    z-index: -1;
-    width: fit-content;
-    height: fit-content;
+    object-fit: cover;
+    position: fixed;
+    width: 45vw;
+    height: 85vh;
 }
 
 /* The game elements */
@@ -88,9 +74,9 @@ body {
     grid-template-columns: 50%;
     grid-template-rows: 25% 50% 20%;
     grid-template-areas: 
-    "main info"
+    "main header"
     "main footer"
-    "header footer";
+    "main footer";
     column-gap: 20px;
     grid-auto-flow: dense;
     height: 95vh;
@@ -103,6 +89,49 @@ body {
         display: flex;
         justify-content: center;   
         align-items: center;
+        padding: 5px 15px 25px 15px;
+    }
+
+    .border{
+        position: absolute;
+        height: 85vh;
+        width: 45vw;
+    }
+
+    .border > div{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+
+    .border .frames div{
+        background: url("./assets/Background/border.png") repeat-x 50% 50%;
+        width: 103%;
+        height: 15px;
+        position: absolute;
+        top: 0px;
+        left: -5px;
+        z-index: 4;
+    }
+
+    .border .frames div:nth-child(2), .border .frames div:nth-child(4){
+        background: url("./assets/Background/border-vert.png") repeat-y 50% 50%;
+        width: 15px;
+        height: 103%;
+    }
+
+    .border .frames div:nth-child(3), .border .frames div:nth-child(4){
+        transform: rotate(180deg);
+    }
+
+    .border .frames div:nth-child(3){
+        bottom: 0px;
+        top: auto;
+    }
+
+    .border .frames div:nth-child(4){
+        right: -5px;
+        left: auto;
     }
 
     #detectorCanvases{
@@ -168,7 +197,6 @@ body {
         align-items: center;
         justify-content: space-around;
         z-index: 4;
-        background-color: rgb(250,250,250);
         margin: 15px;
         padding: 3%;
     }
@@ -183,6 +211,8 @@ body {
         height: 12vh;
         max-height: 18vh;
         font-size: 100%;
+        background-color: white;
+        font-family: 'Lato', sans-serif;
     }
 
     .endgame{
@@ -236,6 +266,7 @@ body {
             button {
                 background: rgba(230,230,230, 0.6);
                 border: 1px solid rgba(200,200,215,1);
+                border-radius: 5px !important;
                 cursor: pointer;
                 color: rgb(42, 42, 43);
                 padding: 3px;
@@ -318,7 +349,7 @@ body {
 
 /* Left panel */
 #menu {
-    left: 0;
+    left: -3px;
     display: grid;
     grid-template-rows: 1fr 2fr;
     grid-template-areas: 
@@ -343,12 +374,6 @@ body {
 #linksBody{
     grid-area: links;
     overflow-y: scroll;
-}
-
-#linksMain{
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
 }
 
 .linksHeader{
@@ -382,6 +407,7 @@ hr.rounded{
     display: flex;
     justify-content: space-evenly;
     justify-items: center;
+    margin-bottom: 10px;
 }
 
 .socialLogo{
@@ -391,12 +417,12 @@ hr.rounded{
 
 /* The right panel with subdetector/particle info */
 #moreInfo{
-    right: 0;
+    right: -3px;
 }
 
 /* Tabs for the side panels - for mobile and tablet */
 .infoTabsContainer {
-    background-color: rgba(240,240,240,0.5);
+    background-color: rgba(240,240,240,1);
     display: none;
     width: 49.5%;
     max-width: 384px;
@@ -437,10 +463,11 @@ hr.rounded{
 
 .infoTabContent {
     display: none;
-    padding: 6px 12px;
+    padding: 6px 12px 15px 12px;
     -webkit-animation: fadeEffect 1s;
     animation: fadeEffect 1s;
     margin-top: 40px;
+    height: calc(var(--vh, 1vh) * 100 - 40px);
 }
 
 .panel-title{
@@ -468,16 +495,11 @@ hr.rounded{
 /* Content of the tabs */
     .subdetTab, .particlesTab{
         display: none;
-        max-height: 80vh;
-        grid-template-areas: 
-        "title"
-        "main";
-        grid-template-rows: 20% 65%;
+        flex-flow: column nowrap;
+        height: calc(100% - 50px);
     }
 
     .subdetTab h3, .particlesTab h3{
-        grid-area: title;
-        max-height: 5vh;
         z-index: 13;
         padding: 0 20px;
         Font-Family: 'Roboto', Sans-Serif;
@@ -485,10 +507,9 @@ hr.rounded{
     }
 
     .subdetTab .tabText, .particlesTab .tabText{
-        grid-area: main;
         margin: 0;
         z-index: 12;
-        padding: 10px 30px 10px 15px;
+        padding: 10px 30px 15px 15px;
         text-shadow: 0 0 10px white;
         overflow-y: scroll;
     }
@@ -519,7 +540,7 @@ hr.rounded{
             width: 100%;
             background-color: rgb(252, 252, 252);
             z-index: 16;
-            bottom: 1px;
+            bottom: 0px;
             height: 50px;
         }
 
@@ -614,8 +635,6 @@ input {
     display: block;
     padding: 10px 40px;
     width: 100vw;
-    background-image: linear-gradient(rgba(240,240,240,1),rgba(220,220,220,1));
-    box-shadow: 0 2px 15px 2px #c5c5c5;
     position: sticky;
     top: 0px;
     z-index: 10;
@@ -777,7 +796,6 @@ input {
     }
 
     .app_initoutput{
-        align-self: self-end;
         font-size: 125%;
     }
 
@@ -798,6 +816,33 @@ input {
         max-height: 350px;
         max-width: 350px;
     }
+
+    .topnav{
+        top: 15px;
+    }
+
+    #bigBorder{
+        visibility: visible;
+        height: 100%;
+        width: 100%;
+    }
+    
+    .border #bigFrames div{
+        background: url("./assets/Background/borderw.png") repeat-x 50% 50%;
+    }
+    
+    .border #bigFrames div:nth-child(2), .border #bigFrames div:nth-child(4){
+        background: url("./assets/Background/border-vertw.png") repeat-y 50% 50%;
+        z-index: 1;
+    }
+
+    .border #bigFrames div:nth-child(2){
+        left: 0px;
+    }
+
+    .border #bigFrames div:nth-child(4){
+        right: 0px;
+    }
 }
 
 /*Small desktop*/
@@ -806,16 +851,7 @@ input {
     body{
         font-size: 16px;
     }
-/*   
-    .container_{
-        display: flex;  
-        justify-content: space-around;
-    }  
 
-    .topnav{
-        display: none;
-    }
-*/
     .tabImage{
         height: 35vmax;
     }
@@ -835,10 +871,11 @@ input {
     }
 
     .infoTabContent{
-        display: block;
         flex: 1 1 auto;
         margin-top: 0px;
         padding: 0px;
+        display: flex;
+        flex-flow: column nowrap;
     }
 
     #moreInfo .infoTabContent{
@@ -852,10 +889,6 @@ input {
 
     .panel-title{
         display: flex;
-    }
-
-    .subdetTab .tabText, .particlesTab .tabText{
-        height: 32vmin;
     }
 
     button{

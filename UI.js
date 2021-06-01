@@ -24,8 +24,8 @@ function showTab(n, m, l) {
     }
   }
   else{
-    y[m].style.display = "grid";
-    z[l].style.display = "grid";
+    y[m].style.display = "flex";
+    z[l].style.display = "flex";
     if (m == 0) {
         document.getElementById("prevSubdet").hidden = true;
     } else if(m ==(y.length-1)) {
@@ -126,10 +126,10 @@ function openInfoTab(evt, tabName) {
   }
 
   // Show the current tab, and add an "active" class to the button that opened the tab
-  document.getElementById(tabName).style.display = "block";
+  document.getElementById(tabName).style.display = "flex";
   if(window.innerWidth>=992){
     for (i = 0; i < infoTabContent.length; i++) {
-      infoTabContent[i].style.display = "block";
+      infoTabContent[i].style.display = "flex";
     }
   }
   evt.currentTarget.className += " active";
