@@ -15,7 +15,7 @@ var game = {
         displayValue: 0,
     },
     wrong: {
-        displayValue: 0,
+        displayValue: 5,
     },
     question: "",
 
@@ -27,15 +27,26 @@ var game = {
     
 };
 const buttons = document.querySelectorAll('.inputbuttons');
-
+for(var i = 0; i < buttons.length; i++){
+    buttons[i].addEventListener("click", event => handleButtons(event), false)   
+} 
 //Handle start
 document.getElementById('start').addEventListener("click", function(){
     document.getElementById('startPopup').style.visibility = 'hidden';
     document.getElementById('detector_events').hidden = false;
-    for(var i=0; i<buttons.length; i++){
-        buttons[i].disabled = false;
+
+    if(game.difficulty == 3){
+        document.getElementById('correctWrongContainer').style.display = 'none';
+        document.getElementById('app_initoutput').style.backgroundColor = 'transparent';
+        document.getElementById('userParticle').hidden = true;
+        document.getElementById('clear').hidden = true;
+        document.getElementById('submit').hidden = true;
+        document.getElementById('restart').style.gridColumnStart = 'clear';
+        document.getElementById('inputbuttons').style.position = 'relative';    
     }
-    randomGenerate(1);
+    else{
+        randomGenerate(1);
+    }
 }, false);
 
 //Handles the buttons setting the difficulty
@@ -48,11 +59,6 @@ for(var i = 0; i<diffButtons.length; i++){
         }
         diffButtons[event.target.value].className += " active";
     },false);
-}
-
-//Buttons - handles the inputs
-for(var i = 0; i < buttons.length; i++){
-    buttons[i].addEventListener("click", event => handleButtons(event))
 }
 
 function handleButtons(event) {   
@@ -76,7 +82,13 @@ function handleButtons(event) {
 };
 
 function inputDigit(digit) {
-    game.input.displayValue = game.input.displayValue === null? digit : game.input.displayValue + digit;
+
+    if(game.difficulty == 3){
+        game.question = digit;
+        detector.handleQuestion();
+    }else{
+        game.input.displayValue = game.input.displayValue === null? digit : game.input.displayValue + digit;
+    }
 };
 
 function handleClear() {
@@ -96,9 +108,16 @@ function handleRestart() {
     detector.events.submitted = true;
     game.allQuestions = "";
     game.input.displayValue = "";
-    for(var i=0; i<buttons.length; i++){
-        buttons[i].style.visibility = 'visible';
-    }
+
+    document.getElementById('correctWrongContainer').style.display = 'flex';
+    document.getElementById('app_initoutput').style.backgroundColor = 'rgba(254,254,254,1)';
+    document.getElementById('userParticle').hidden = false;
+    document.getElementById('clear').hidden = false;
+    document.getElementById('submit').hidden = false;
+    document.getElementById('restart').style.gridColumnStart = 'restart';
+    document.getElementById('inputbuttons').style.position = 'static';
+
+
     document.querySelector('.userParticle').style.visibility = 'visible';
     document.querySelector(".endgame").hidden = true;
     document.getElementById('extraMessage').hidden = true;
@@ -108,7 +127,7 @@ function handleRestart() {
     game.level.sub.displayValue = 1;
     game.correct.displayValue = 0;
         updateCorrect();
-    game.wrong.displayValue = 0;
+    game.wrong.displayValue = 5;
         updateWrong();
     document.getElementById('startPopup').style.visibility = 'visible';
 };
@@ -117,7 +136,6 @@ function updateDisplay() {
     let display = document.getElementById('userParticle');
     let number = game.input.displayValue;
     let userInput = [];
-
     display.value = "";
     for(var i = 0; i < number.length; i++){
         userInput.push(+number.charAt(i));
@@ -217,16 +235,16 @@ function compareUserInput(userInput) {
         }
     }
     else{
-        game.wrong.displayValue += numberWrong;
+        game.wrong.displayValue -= numberWrong;
         updateWrong();
-        var holder = document.getElementById('detector-holder');
+        var holder = document.getElementById('detectorCanvases');
         holder.style.setProperty('--animate-duration', '0.4s');
         holder.classList.add('animate__animated', 'animate__shakeX');
         holder.addEventListener('animationend', () => {
             holder.classList.remove('animate__animated', 'animate__shakeX');
         });
     }
-    if(game.wrong.displayValue < 5){
+    if(game.wrong.displayValue > 0){
         randomGenerate(game.level.main.displayValue);
     }
     else{

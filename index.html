@@ -28,6 +28,7 @@
 <link href="https://fonts.googleapis.com/css?family=Droid+Serif|Roboto:300" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Arvo|Lato" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 </head>
 
 <body translate= "no">
@@ -36,10 +37,6 @@
             <div class="frames" id="bigFrames">
                 <div></div>
                 <div></div>
-                <div></div>
-                <div></div>
-            </div>
-            <div class="corners">
                 <div></div>
                 <div></div>
             </div>
@@ -121,9 +118,7 @@
                         <h4>Game Rules</h4>
                     </div>
                     <p id ="rules-text">
-                        When a particle track appears, use the buttons to try and identify it as one of the 5 types of particles we can detect. The higher the level, the more particles will appear. 
-                        <br><br>
-                        How many can you identify!
+                        Use the buttons to try and identify the tracks as one of the 5 types of particles we can detect. The more you get right, the more particles will appear!
                         <br><br>
                         <button id="reopenIntro" onclick="openPopup()">See the introduction again?</button>
                     </p>   
@@ -133,9 +128,6 @@
                     <div class = "panel-title"><h4>Where to next...</h4></div>
                     <div id="linksMain">
                         <h3 class = "linksHeader" id = "cernLinksHeader">Learn more about CERN</h3>
-                        <p class="linksText">
-                            Take a look at the pages below to find out more about CERN and its groundbreaking discoveries! 
-                        </p>
                         <ul id="cernLinks">
                             <li>
                                 <i class="arrow right"></i><a href="https://home.cern/science/accelerators/large-hadron-collider" target="_blank">Large Hadron Collider</a>
@@ -166,21 +158,33 @@
         <div  id = "app" class = "main">
             <div id = "startPopup">
                     <div class="difficultyButtonsContainer">
-                        Choose difficulty:
                         <button class="difficultyButtons active" id="beginner" value="0">Beginner</button>
                         <button class="difficultyButtons" id="intermediate" value="1">Intermediate</button>
                         <button class="difficultyButtons" id="expert" value="2">Expert</button>
+                        <br>
+                        <button class="difficultyButtons" id="creative" value="3">Free-Play</button>
+                        <br>
                     </div>                 
                     <button id = "start" value = "start"><a>Start</a></button>
             </div>
             <div id = "main_app">    
-                <div class="app_initoutput">
-                    <span id="app_correct">
-                        Correct: <input value = "0" type = "text" class = "app_correctwrong" id="app_correct_number" disabled/>
-                    </span>
-                    <span id="app_wrong">
-                        Wrong: <input value = "0" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
-                    </span>
+                <div class="app_initoutput" id="app_initoutput">
+                    <div class="border" id="smallBorder">
+                        <div class="frames" id="smallFrames">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </div> 
+                    <div id="correctWrongContainer">
+                        <span id="app_correct">
+                            <a>Score: </a><input value = "0" type = "text" class = "app_correctwrong" id="app_correct_number" disabled/>
+                        </span>
+                        <span id="app_wrong">
+                            <a>Lives: </a><input value = "5" type = "text" class = "app_correctwrong" id="app_wrong_number" disabled/>
+                        </span>
+                    </div>
                 </div>
                 <div id="detector-holder">
                     <div class="border">
@@ -200,9 +204,9 @@
                 </div>  
                 <div class ="app_input">
                     <div class = "userParticle">
-                        <p>Particles: </p><textarea type = "text" value = "" id="userParticle" disabled></textarea>
+                        <textarea type = "text" value = "" id="userParticle" disabled></textarea>
                     </div>         
-                    <div class ="inputbuttons">                            
+                    <div class ="inputbuttons" id="inputbuttons">                            
                         <button class ="inButtons" id = "photon" name = "0" value = "0" >Photon</button>
                         <button class ="inButtons" id = "electron" name = "1" value = "1" >Electron</button>
                         <button class ="inButtons" id = "muon" name = "2" value = "2" >Muon</button>
@@ -296,26 +300,31 @@
                     <div class = "panel-title" id = "particlesTitle"><h4>Particles</h4></div>                      
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Photon</h3>
+                        <img class="particleImage" id="photonTrack" src="./assets/Particle/Photon.png">
                         <p class="tabText">
                             Photons are particles of light. They have no mass, no electric charge and they’re elementary which means they’re not made up of smaller particles. Photons interact with matter a lot, their interactions with the eye allow you to read what’s on the screen right now! When they pass through a detector at CERN they’re detected at the electromagnetic calorimeter.                            </p>
                     </div>
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Electron</h3>
+                        <img class="particleImage" id="electronTrack" src="./assets/Particle/Electron.png">
                         <p class="tabText">
                             Electrons are small, stable, electrically charged, elementary particles. They are the foundation of electronics and are also produced in particle collisions at CERN, where the electromagnetic calorimeter can detect them.                             </p>
                     </div>           
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Muon</h3>
+                        <img class="particleImage" id="muonTrack" src="./assets/Particle/Muon.png">
                         <p class="tabText">
                             Muons are like electrons except they’re much bigger and much less stable. The detector can’t stop the muons, so they travel right through and it’s only at the outer edge they can be detected in the muon tracker.                            </p>
                     </div>
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Neutral Hadron</h3>
+                        <img class="particleImage" id="nhadronTrack" src="./assets/Particle/Nhadron.png">
                         <p class="tabText">
                             Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Neutrons are an example of a neutral hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
                     </div>
                     <div class="particlesTab">
                         <h3 class = "tabHeader">Charged Hadron</h3>
+                        <img class="particleImage" id="chadronTrack" src="./assets/Particle/Chadron.png">
                         <p class="tabText">
                             Hadrons are particles made up of quarks – these are just another type of elementary particle. They can be found in pairs and triplets (or sometimes more!). Protons are an example of a charged hadron; these are found in the nuclei of the atoms which make up everything around us. In our detector they get stopped at the hadronic calorimeter.                            </p>
                     </div>
@@ -334,7 +343,6 @@
             </div>
         </div>
     </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 
     <script src = "particle.js"></script>
     <script src = "detector.js"></script>
