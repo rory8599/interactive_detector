@@ -52,17 +52,19 @@ body {
     flex-flow: column nowrap;
     z-index: 8;
     background-color: #ffffff;
-    box-shadow: 0 0 5px 5px #bbbbbb;
-    align-items: center;
+    box-shadow: 0 0 10px 8px rgba(250,250,250,0.6);
+    border: 8px outset rgba(220,220,220,0.3);
     padding: 10px;
-    width: 80%;
+    width: 74%;
     position: fixed;
-    left: 10%;
-    top: 40%;
+    left: 13%;
+    top: 30%;
+    border-radius: 10px !important;
 }
 
 .difficultyButtonsContainer{
     width: max-content;
+    display: contents;
 }
 
 .difficultyButtons.active{
@@ -162,27 +164,45 @@ body {
 
 /* The Level and Wrong displays*/ 
     .app_initoutput{
+        width: 37.5vw;
+        height: 17.5vh;
+        height: calc(var(--vh, 1vh) * 17.5);
         grid-area: header;
-        align-self: self-end;
+        justify-self: center;
+        align-self: flex-end;
+        background-color: rgba(254,254,254,1);
+        padding: 2%;
+        font-size: 110%;
+        z-index: 5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #smallBorder{
+        width: 37.5vw;
+        height: 17.5vh;
+        height: calc(var(--vh, 1vh) * 17.5);
+    }
+
+    #correctWrongContainer{
         display: flex;
         flex-flow: row nowrap;
-        background-color: rgba(250,250,250,0);
-        margin: 1% 5%;
-        padding: 2%;
         text-align: center;
         justify-content: space-around;
         align-items: center;
-        font-size: 110%;
-        z-index: 5;
     }
 
     #app_correct, #app_wrong{
         margin: 8% 2%;
-        background: transparent url(assets/whiteTextureCircle.png) center center no-repeat;
-        background-size: cover;
-        height: 7.5vw;
-        width: 7.5vw;
         padding: 3% 1%;
+        line-height: 1.5;
+    }
+
+    #app_correct > a, #app_wrong > a{
+        font-family: Arial, Helvetica, sans-serif;
+        text-transform: uppercase;
+        font-size: 80%;
     }
 
     .app_correctwrong{
@@ -192,18 +212,21 @@ body {
 /* The Input area - buttons and particle display */
     .app_input{
         grid-area: footer;
+        width: 45vw;
         display: flex;
         flex-flow: column nowrap;
         align-items: center;
         justify-content: space-around;
         z-index: 4;
         margin: 15px;
-        padding: 3%;
+        padding: 0px 3% 3% 0px;
     }
 
     .userParticle{
         flex: 1 1 30%;
         margin: 0 10px 10px 10px;
+        padding-top: 30px;
+        width: 25vw;
     }
 
     #userParticle{
@@ -235,6 +258,7 @@ body {
             "photon photon electron electron muon muon"
             "nhadron nhadron nhadron chadron chadron chadron"
             "clear clear submit submit restart restart";
+            bottom: 35%;
         }
         
         #photon{
@@ -264,9 +288,9 @@ body {
 
         /* Button style and animation */
             button {
-                background: rgba(230,230,230, 0.6);
+                background: rgb(252,252,254);
                 border: 1px solid rgba(200,200,215,1);
-                border-radius: 5px !important;
+                border-radius: 3px !important;
                 cursor: pointer;
                 color: rgb(42, 42, 43);
                 padding: 3px;
@@ -278,13 +302,15 @@ body {
             }
 
             #clear, #submit, #restart{
-                background: rgba(214, 214, 223, 0.9)
+                background: rgba(180, 175, 185, 0.9)
             }
 
             #start{
                 position: relative;
                 overflow: hidden;
-                border: 3px solid rgba(255, 255, 255, 0.8);
+                border: 3px solid rgba(180,180,180, 0.2);
+                padding: 8px;
+                background-color: rgb(242,244,248);
             }
               
               #start a {
@@ -319,7 +345,7 @@ body {
     top: 0;
     border-right: 2px solid rgba(200, 200, 200, 0.5);
     border-left: 2px solid rgba(200, 200, 200, 0.5);
-    background-color: rgb(252, 252, 252);
+    background-color: white;
     overflow: hidden;
     transition: 0.5s;
     font-size: 150%;
@@ -350,30 +376,20 @@ body {
 /* Left panel */
 #menu {
     left: -3px;
-    display: grid;
-    grid-template-rows: 1fr 2fr;
-    grid-template-areas: 
-    "rules"
-    "links";
+    display: flex;
 }
 
 #left-body{
     height: 100%;
 }
 
-#rulesBody{
-    grid-area: rules;
+#rulesBody, #linksBody{
     overflow-y: scroll;
 }
 
 #rules-text{
     padding: 10px;
     text-align: center;
-}
-
-#linksBody{
-    grid-area: links;
-    overflow-y: scroll;
 }
 
 .linksHeader{
@@ -415,12 +431,10 @@ hr.rounded{
     box-shadow: 0 0 10px 1px lightgray;
 }
 
-/* The right panel with subdetector/particle info */
 #moreInfo{
     right: -3px;
 }
 
-/* Tabs for the side panels - for mobile and tablet */
 .infoTabsContainer {
     background-color: rgba(240,240,240,1);
     display: none;
@@ -472,7 +486,7 @@ hr.rounded{
 
 .panel-title{
     display: none;        
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(251, 252, 255);
     border-top: 2px solid rgba(200, 200, 200, 0.5);
     border-bottom: 2px solid rgba(200, 200, 200, 0.5);
     width: 100%;
@@ -514,7 +528,7 @@ hr.rounded{
         overflow-y: scroll;
     }
 
-    .subdetImage{
+    .subdetImage, .particleImage{
         opacity: 0.65;
         position: absolute;
         right: -70%;
@@ -528,6 +542,13 @@ hr.rounded{
 
     #muonHL{
         opacity: 0.3;
+    }
+
+    .particleImage{
+        width: 100%;
+        top: auto;
+        right: -48%;
+        bottom: -8%;
     }
 
     /* Deal with the tabs on the panel for the particles and subdetectors */
@@ -571,7 +592,7 @@ hr.rounded{
         .subdetStep, .particleStep{
             height: 8px;
             width: 8px;
-            background-color: #bbb;
+            background-color: lightslategray;
             display: inline-block;
             opacity: 0.5;
         }
@@ -664,6 +685,10 @@ input {
         top: calc(var(--vh, 1vh) * 4);
         left: 5vmax;        
     }
+
+    #regForm{
+        height: calc(var(--vh, 1vh) * 92 - 80px);
+    }
     
     h1 {
         Font-Family: 'Roboto', Sans-Serif;
@@ -698,15 +723,17 @@ input {
         display: inline;
         margin: 10px;
         overflow-y: scroll;
-        height: 40vmin;
+        height: 40vh;
+        height: calc(var(--vh, 1vh) * 40);
     }
 
     .tabImage{
         grid-area: image;
-        width: 40vmax;
-        height: 22vmax;
+        max-width: 40vw;
+        height: 42vh;
+        height: calc(var(--vh, 1vh) * 42);
         object-fit: contain;
-        align-self: baseline;
+        align-self: center;
         justify-self: center;
         margin: -15px 0 0 0;
     }
@@ -801,11 +828,8 @@ input {
 
     .tab .tabText{
         font-size: 150%;
-        height: 60vmin;
-    }
-
-    .tabImage{
-        height: 30vmax;
+        height: 55vh;
+        height: calc(var(--vh, 1vh) * 55);
     }
 
     .tabHeader{
@@ -853,12 +877,13 @@ input {
     }
 
     .tabImage{
-        height: 35vmax;
+        height: 52vh;
+        height: calc(var(--vh, 1vh) * 52);
     }
 
     #startPopup{
-        width: 40%;
-        left: 30%;
+        width: 50%;
+        left: 25%;
     }
 
     .responsive-canvas{    
@@ -876,10 +901,15 @@ input {
         padding: 0px;
         display: flex;
         flex-flow: column nowrap;
+        height: auto;
     }
 
     #moreInfo .infoTabContent{
         height: 50vh;
+    }
+
+    .subdetImage{
+        max-height: 50vh;
     }
 
     #nextPrevBtnSubdet{
@@ -893,6 +923,8 @@ input {
 
     button{
         font-size: 2vmin;
+        border-radius: 6px !important;
+        border: 2.5px solid rgba(200,200,215,1);
     }
 }
 
