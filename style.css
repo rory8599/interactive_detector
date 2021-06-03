@@ -914,6 +914,9 @@ input {
         height: auto;
     }
 
+    .subdetTab, .particlesTab{
+        height: calc(100% - 100px);
+    }
     #moreInfo .infoTabContent{
         height: 50vh;
     }
