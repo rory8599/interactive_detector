@@ -13,6 +13,7 @@ body {
 
 #bigBorder{
     visibility: hidden;
+    z-index: 5;
 }
 
 * {
@@ -58,7 +59,8 @@ body {
     width: 74%;
     position: fixed;
     left: 13%;
-    top: 30%;
+    top: 50vh;
+    transform: translateY(-50%);
     border-radius: 10px !important;
 }
 
@@ -127,7 +129,7 @@ body {
     }
 
     .border .frames div:nth-child(3){
-        bottom: 0px;
+        bottom: -5px;
         top: auto;
     }
 
@@ -180,9 +182,9 @@ body {
     }
 
     #smallBorder{
-        width: 37.5vw;
-        height: 17.5vh;
-        height: calc(var(--vh, 1vh) * 17.5);
+        width: 40vw;
+        height: 22.5vh;
+        height: calc(var(--vh, 1vh) * 22.5);
     }
 
     #correctWrongContainer{
@@ -217,7 +219,7 @@ body {
         flex-flow: column nowrap;
         align-items: center;
         justify-content: space-around;
-        z-index: 4;
+        z-index: 6;
         margin: 15px;
         padding: 0px 3% 3% 0px;
     }
@@ -836,11 +838,6 @@ input {
         margin: 5px;
     }
 
-    .responsive-canvas{
-        max-height: 350px;
-        max-width: 350px;
-    }
-
     .topnav{
         top: 15px;
     }
@@ -864,8 +861,12 @@ input {
         left: 0px;
     }
 
+    .border #bigFrames div:nth-child(3){
+        bottom: -10px;
+    }
+
     .border #bigFrames div:nth-child(4){
-        right: 0px;
+        right: -20px;
     }
 }
 
@@ -874,6 +875,14 @@ input {
 
     body{
         font-size: 16px;
+    }
+
+    .border #bigFrames div:nth-child(3){
+        bottom: 0px;
+    }
+
+    .border #bigFrames div:nth-child(4){
+        right: 0px;
     }
 
     .tabImage{
@@ -886,9 +895,10 @@ input {
         left: 25%;
     }
 
-    .responsive-canvas{    
-        max-height: 500px;
-        max-width: 500px;
+    #smallBorder{
+        width: 37.5vw;
+        height: 17.5vh;
+        height: calc(var(--vh, 1vh) * 17.5);
     }
 
     .info{
@@ -932,11 +942,6 @@ input {
 @media screen and (min-width: 1200px) {
     body{
         font-size: 18px;
-    }
-
-    .responsive-canvas{    
-        max-height: 750px;
-        max-width: 750px;
     }
 }
 
