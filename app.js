@@ -34,6 +34,7 @@ for(var i = 0; i < buttons.length; i++){
 document.getElementById('start').addEventListener("click", function(){
     document.getElementById('startPopup').style.visibility = 'hidden';
     document.getElementById('detector_events').hidden = false;
+    document.getElementById('inputbuttons').style.visibility = 'visible';
 
     if(game.difficulty == 3){
         document.getElementById('correctWrongContainer').style.display = 'none';
